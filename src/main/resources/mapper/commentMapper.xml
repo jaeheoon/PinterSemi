@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="commentSQL">
+ 	<!-- 댓글 작성 -->
+	<insert id="commentWrite" parameterType="comment">
+		INSERT INTO CommentTable (seq_comment, seq_board, name, commentContent, logtime)
+    	VALUES (seq_comment_id.nextval, #{seq_board}, #{name}, #{commentContent}, SYSDATE)
+	</insert>
+ 	<!-- 댓글 목록 -->
+ 	<select id="commentList" parameterType="long" resultType="comment">
+        SELECT * FROM CommentTable WHERE seq_board = #{seq_board} ORDER BY logtime DESC
+    </select>
+    <!-- 게시글 조회수 -->
+    <update id="hitUpdate" parameterType="long">
+		update board set hit=hit+1 where seq_board = #{seq_board}
+	</update>
+	
+	<!-- 댓글목록 DTO -->
+	<select id="commentListDTO" parameterType="long" resultType="comment">
+        SELECT * FROM CommentTable
+    </select>
+    
+    <!-- 댓글 삭제 -->
+    <delete id="commentDelete" parameterType="long">
+ 		DELETE FROM CommentTable WHERE seq_comment = #{seq_comment}
+ 	</delete>
+    
+     <!-- 댓글 수정 -->
+    <update id="commentUpdate" parameterType="map">
+    
+        UPDATE CommentTable 
+   		SET commentContent = #{commentContent} 
+    	WHERE seq_comment = #{seq_comment}
+    	
+    </update>
+    
+ </mapper>

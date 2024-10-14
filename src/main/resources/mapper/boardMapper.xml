@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.dao.BoardDAO">
+ 	<!-- 핀 등록 -->
+ 	<insert id="boardWrite" parameterType="boardDTO">
+ 		INSERT INTO board (seq_board, seq_member, image, name, imageSubject, imageContent, hit, logtime)
+        VALUES (seq_board_id.NEXTVAL, #{seq_member}, #{image}, #{name} ,#{imageSubject}, #{imageContent}, 0, SYSDATE)
+ 	</insert>
+ 	
+ 	<!-- 핀 목록 -->
+ 	<select id="getBoardList" resultType="boardDTO">
+ 		select * from board order by seq_board desc
+ 	</select>
+ 	
+ 	<select id="getBoardPagingList" resultType="boardDTO">
+ 	<![CDATA[
+        SELECT * FROM (
+            SELECT b.*, ROWNUM rnum FROM (
+                SELECT * FROM board ORDER BY seq_board DESC
+            ) b WHERE ROWNUM <= #{endRow}
+        ) WHERE rnum > #{startRow}
+        ]]>
+    </select>
+    
+    <select id="getBoardPopularPagingList" resultType="boardDTO">
+ 	<![CDATA[
+        SELECT * FROM (
+            SELECT b.*, ROWNUM rnum FROM (
+                SELECT * FROM board ORDER BY hit DESC
+            ) b WHERE ROWNUM <= #{endRow}
+        ) WHERE rnum > #{startRow}
+        ]]>
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM board
+    </select>
+ 	
+ 	<!--핀 뷰 -->
+ 	<select id="getBoard" parameterType="long" resultType="boardDTO">
+ 		select * from board where seq_board=#{seq_board}
+ 	</select>
+ 	
+ 	<!-- 핀 수정 -->
+ 	<update id="boardUpdate" parameterType="boardDTO">
+ 		update board set 
+ 		image = #{image}, 
+ 		imageSubject = #{imageSubject}, 
+ 		imageContent = #{imageContent} 
+ 		where seq_board = #{seq_board}
+ 	</update>
+ 	
+ 	<delete id="boardDelete" parameterType="long">
+ 		DELETE FROM board WHERE seq_board = #{seq_board}
+ 	</delete>
+ 	
+ 	<update id="boardUpdateNotImage" parameterType="boardDTO">
+       update board set
+       imageSubject = #{imageSubject}, 
+       imageContent = #{imageContent} 
+       where seq_board = #{seq_board}
+    </update>
+    
+    <!--  마이페이지 내 게시물  -->
+	<select id="getMyBoardList" parameterType="long" resultType="boardDTO">
+	 	select * from board where seq_member = #{seq_member}
+	</select>
+	
+	<select id="searchBoardPagingList" parameterType="map" resultType="boardDTO">
+	<![CDATA[
+	 	SELECT * FROM (
+	 	 SELECT board.*, ROW_NUMBER()
+	 	 OVER (ORDER BY seq_board DESC) AS rnum
+	 	 FROM board WHERE imagesubject
+	 	 LIKE '%' || #{keyword} || '%' OR
+	 	 imagecontent LIKE '%' || #{keyword} || '%' )
+	 	 WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	 ]]>
+	</select>
+</mapper>

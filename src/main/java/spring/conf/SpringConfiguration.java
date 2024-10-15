@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.board.bean.BoardDTO;
 import com.board.service.impl.BoardServiceImpl;
+import com.comment.bean.CommentDTO;
 import com.user.bean.UserDTO;
 
 /*
@@ -90,5 +91,9 @@ public class SpringConfiguration {
 	@Bean
 	public BoardServiceImpl boardServiceImpl() {
 		return new BoardServiceImpl();
+	}
+	@Bean
+	public CommentDTO commentDTO() {
+		return new CommentDTO();
 	}
 }

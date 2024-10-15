@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -17,6 +19,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.board.bean.BoardDTO;
+import com.board.service.impl.BoardServiceImpl;
 import com.user.bean.UserDTO;
 
 /*
@@ -31,6 +35,8 @@ public class SpringConfiguration {
 	private @Value("${jdbc.url}") String url;
 	private @Value("${jdbc.username}") String username;
 	private @Value("${jdbc.password}") String password;
+	@Autowired
+	private ApplicationContext applicationContext;
 	
 	@Bean
 	public List<UserDTO> arrayList() {
@@ -53,10 +59,8 @@ public class SpringConfiguration {
 		sqlSessionFactoryBean.setDataSource(dataSource());
 		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
 		sqlSessionFactoryBean.setMapperLocations(
-			new ClassPathResource[] {
-	            new ClassPathResource("mapper/userMapper.xml")
-	        }
-		);
+	    		  applicationContext.getResources("classpath:mapper/*Mapper.xml")
+	    		  );
 		return sqlSessionFactoryBean.getObject();	//sqlSessionFactory 변환
 	}
 	
@@ -76,5 +80,15 @@ public class SpringConfiguration {
 	@Scope("prototype")
 	public UserDTO userDTO() {
 		return new UserDTO();
+	}
+	
+	// Board
+	@Bean
+	public BoardDTO boardDTO() {
+		return new BoardDTO();
+	}
+	@Bean
+	public BoardServiceImpl boardServiceImpl() {
+		return new BoardServiceImpl();
 	}
 }

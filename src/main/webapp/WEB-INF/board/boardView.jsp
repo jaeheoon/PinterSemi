@@ -7,353 +7,175 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이미지 게시글 폼</title>
-<link rel="stylesheet" type="text/css" href="../css/boardView.css">
-<style>
-#comment-list {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-.comment-content {
-    max-height: 20px;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 10px;
-}
-.comment-full {
-    max-height: none;
-}
-.more-btn, .less-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: white;
-    cursor: pointer;
-    color: blue;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/boardView.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/subjectSearchPage.css">
 </head>
 <body onload="onLoadpage()">
 	<jsp:include page="../component/header.jsp" />
-
-	<form id="container" method="POST"
-		action="${pageContext.request.contextPath}/board/boardUpdateForm.do">
-		<span class="closeBtn" onclick="closePage()">&times;</span> <input
-			type="hidden" id="name" name="name" value="${memDTO.name}"> <input
-			type="hidden" id="seq_board" name="seq_board"
-			value="${boardDTO.seq_board }"> <input type="hidden"
-			id="image" name="image" value="${boardDTO.image}"> <input
-			type="hidden" id="imageSubject" name="imageSubject"
-			value="${boardDTO.imageSubject}"> <input type="hidden"
-			id="imageContent" name="imageContent"
-			value="${boardDTO.imageContent}"> <input type="hidden"
-			id="password" name="password" value="${memDTO.password}">
-		<div id="image">
-			<img
-				src="http://localhost:8080/Inbeomstagram/storage/${boardDTO.image }" />
-		</div>
-		<div id="des">
-			<!-- 제목 -->
-			<div id="subject">
-				<h2>${boardDTO.imageSubject }</h2>
+	<div id="data" data-seq-board="${boardDTO.seq_board}"
+		data-name="${sessionScope.memDTO.name}"
+		data-board-name="${boardDTO.imageSubject}"
+		data-image="${boardDTO.image }"></div>
+	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
+	<div class="back" onclick="closePage()">
+		<button type="button" id="backBtn">
+			<img src="${pageContext.request.contextPath}/img/backBtn.png"
+				alt="뒤로가기 버튼">
+		</button>
+	</div>
+	<div id="main-content">
+		<form id="container" method="POST"
+			action="${pageContext.request.contextPath}/board/boardUpdateForm.do">
+			<input type="hidden" id="name" name="name" value="${memDTO.name}">
+			<input type="hidden" id="seq_board" name="seq_board"
+				value="${boardDTO.seq_board }"> <input type="hidden"
+				id="image" name="image" value="${boardDTO.image}"> <input
+				type="hidden" id="imageSubject" name="imageSubject"
+				value="${boardDTO.imageSubject}"> <input type="hidden"
+				id="imageContent" name="imageContent"
+				value="${boardDTO.imageContent}"> <input type="hidden"
+				id="password" name="password" value="${memDTO.password}">
+			<div id="image">
+				<img
+					src="http://localhost:8080/Inbeomstagram/storage/${boardDTO.image }" />
 			</div>
-			<!-- 내용 -->
-			<div id="content">
-				<p>${boardDTO.imageContent }</p>
-			</div>
-			<!-- 작성자 -->
-			<div id="userName">
-				<h4>작성자 : ${boardDTO.name }</h4>
-			</div>
-			<!-- 댓글 영역 -->
-			<div id="comment-box">
-				<!-- 댓글 수 -->
-				<div id="comment-num">댓글 2개</div>
+			<div id="des">
+				<!-- 제목 -->
+				<div id="info">
+					<svg xmlns="http://www.w3.org/2000/svg" id="likeIcon"
+						viewBox="0 0 512 512">
+					<path
+							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" /></svg>
+					<button type="button" id="scarpBtn"></button>
+					<p style="margin: 0;">${boardDTO.hit}</p>
+					<!-- 나중에 수정해야 함 -->
+					<span id="hitRate"> <svg xmlns="http://www.w3.org/2000/svg"
+							id="hitIcon" viewBox="0 0 448 512">
+						<path
+								d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" /></svg>
+					</span>
+					<p style="margin: 0;">${boardDTO.hit}</p>
+					<span id="share"> <input type="file" id="input-file"
+						accept="image/*" style="display: none;"> <span id="share">
+							<button type="button" id="shareBtn">
+								<img src="${pageContext.request.contextPath}/img/share.png"
+									alt="공유 버튼">
+							</button>
+					</span>
+					</span>
+					<div id="pin-buttons">
+						<c:if test="${memDTO.seq_member == boardDTO.seq_member}">
+							<input type="submit" id="updateBtn" value="수정" />
+							<input type="button" id="deleteBtn" value="삭제" />
+						</c:if>
+					</div>
+				</div>
+				<!-- 작성자 -->
+				<div id="userName">
+					<!-- 나중에 수정해야 함 -->
+					<img src="${pageContext.request.contextPath}/img/imoji.png"
+						alt="유저 프로필 이미지">
+					<h4>작성자 : ${boardDTO.name }</h4>
+				</div>
+				<!-- 제목  -->
+				<div id="subject">
+					<h4>제목 : ${boardDTO.imageSubject }</h4>
+				</div>
+				<!-- 내용 -->
+				<div id="content">
+					<h5>내용</h5>
+					<hr>
+					<p>${boardDTO.imageContent }</p>
+				</div>
+
+				<!-- 댓글 영역 -->
+				<div id="comment-box">
+					<!-- 댓글 수 -->
+					<div id="comment-num">댓글 2개</div>
 
 
-				<!-- 댓글 내용 -->
-				<div id="comment-list">
-					<c:forEach var="comment" items="${commentList}">
-						<input type="text" value="${memDTO.name }" />
-						<div class="comment-content">
+					<!-- 댓글 내용 -->
+					<div id="comment-list">
+						<c:forEach var="comment" items="${commentList}">
+							<input type="text" value="${memDTO.name }" />
+							<div class="comment-content">
 
-							<strong>${comment.name}</strong> : ${comment.commentContent}
-							(${comment.logtime})
-							<!-- 로그인한 사용자와 댓글 작성자가 같을 때만 버튼을 표시 -->
-							<button class="options-btn" data-seq="${comment.seq_comment}">⋯</button>
+								<strong>${comment.name}</strong> : ${comment.commentContent}
+								(${comment.logtime})
+								<!-- 로그인한 사용자와 댓글 작성자가 같을 때만 버튼을 표시 -->
+								<button class="options-btn" data-seq="${comment.seq_comment}">⋯</button>
+							</div>
+						</c:forEach>
+					</div>
+
+
+					<!-- 댓글 작성 -->
+					<div id="comment-input" style="display: flex; align-items: center;">
+						<div id="memberProfileImage">
+							<img src="${pageContext.request.contextPath}/img/imoji.png"
+								alt="유저 프로필 이미지">
 						</div>
-					</c:forEach>
-				</div>
+						<input type="text" id="commentContent" name="commentContent"
+							style="padding-left: 10px;">
 
-				<!-- 댓글 작성 -->
-				<div id="comment-input">
-					<div id="commentDiv"></div>
-					<textarea id="commentContent" name="commentContent"></textarea>
-					<button type="button" id="commentBtn">작성</button>
-				</div>
+						<!-- 이모지 버튼 -->
+						<button type="button" id="emoji_btn"
+							style="background: none; border: none; padding: 0; cursor: pointer; order: 0;">
+							<img src="${pageContext.request.contextPath}/img/imoji.png"
+								alt="Emoji" style="height: 20px; width: 20px;">
+						</button>
 
-				<div id="pin-buttons">
-					<c:if test="${memDTO.seq_member == boardDTO.seq_member}">
-						<input type="submit" id="updateBtn" value="수정" />
-						<input type="button" id="deleteBtn" value="삭제" />
-					</c:if>
-				</div>
+						<!-- 작성 버튼 -->
+						<button type="button" id="commentBtn"
+							style="background: none; border: none; padding: 0; cursor: pointer; display: none;">
+							<img src="${pageContext.request.contextPath}/img/send.png"
+								alt="Send" style="width: 20px; height: 20px;">
+						</button>
+					</div>
 
+				</div>
 			</div>
+		</form>		
+	</div>
+	<div id="searchMore">
+			<h4 style="text-align: center; margin-top:30px; color:black">더 찾아보기</h4>
+			<section class="gallery" style="padding:2em 0;">
+				<c:forEach var="boardDTO" items="${list}">
+					<div class="grid-item">
+						<a
+							href="${pageContext.request.contextPath}/board/boardView.do?seq_board=${boardDTO.seq_board}">
+							<img
+							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
+							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>
+						</a>
+					</div>
+				</c:forEach>				
+			</section>
 		</div>
-	</form>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+		crossorigin="anonymous"></script>
+	<script>
+		// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+		Kakao.init('{JavasriptAppKey}');
+		// SDK 초기화 여부를 판단합니다.
+		console.log(Kakao.isInitialized());		
+	</script>	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-	// 댓글 개수 함수
-	function updateCommentCount(count) {
-	    $('#comment-num').text('댓글 ' + count + '개');
-	}
-
-	$('#deleteBtn').click(function() {
-	    var confirmation = confirm("정말 삭제하시겠습니까?");
-	    if (confirmation) {
-	        $('#container').attr('action', '${pageContext.request.contextPath}/board/boardDelete.do');
-	        $('#container').submit();
-	    } else {
-	        console.log("삭제가 취소되었습니다.");
-	    }
-	});
-
-
-
-
-	function onLoadpage(){
-		let seq_Board = '${boardDTO.seq_board}';
-		console.log('seq : ', seq_board);
-		
-		 // 게시글 조회수 증가
-		 $.ajax({
-		        type: 'post',
-		        url: '/Inbeomstagram/comment/commentHit.do', // 조회수 증가를 위한 URL
-		        data: { 'seq_board': seq_Board },
-		        dataType: 'json',
-		        success: function(response) {
-		            console.log('조회수 증가 성공: ', response);
-		        },
-		        error: function(e) {
-		            console.log("조회수 증가 AJAX 실패: ", e);
-		        }
-		    });
-		
-		// 댓글목록 뿌리기
-		$.ajax({
-			type:'post',
-			url:'/Inbeomstagram/comment/commentView.do',
-			data: { 'seq_board': seq_Board },
-			dataType:'json',
-			success : function(data){
-				console.log('데이터 받아왔다 목록 : ', data)
-				updateCommentList(data.commentList);
-				
-				// 댓글 개수 업데이트
-	            updateCommentCount(data.commentList.length);
-				
-			},
-			error : function(e){
-				console.log("ajax 실패 : ", e);
-			}
-		});
-		 
-	}
-
-	function closePage() {
-	   window.history.back(); // 이전 페이지로 이동
-	}
-	   
-	$(function(){
-		var name = '${sessionScope.memDTO.name}';
-		$('#commentBtn').click(function(){
-			event.preventDefault();
-			if($('#commentContent').val() == ''){
-				$('#commentDiv').html('작성하실 댓글을 입력하세요').css('color','red');
-			}else{
-				$.ajax({
-					type:'post',
-					url : '/Inbeomstagram/comment/commentWrite.do',
-					data : {
-						'commentContent' : $('#commentContent').val(),
-						'name': name,
-						'seq_board' : $('#seq_board').val()
-					},
-					dataType:'json',
-					success:function(data){
-						alert("댓글 등록 완료");		
-						console.log("AJAX성공")
-						$('#commentContent').val('');
-						updateCommentList(data.commentList);
-						
-						updateCommentCount(data.commentList.length);  // 댓글 개수 업데이트
-						
-					},
-					error:function(e){
-						console.log("AJAX 실패 : ",e);
-					}
-					
-				});
-			}
-			
-		});
-	});
-
-	function updateCommentList(commentList) {
-		var name = '${sessionScope.memDTO.name}';
-	    $('#comment-list').empty(); // 기존 댓글 목록을 지우고 새로 추가
-	    commentList.forEach(function(comment) {
-	        var commentHtml = 
-	            '<div id="comment-content">' +
-	            '<strong>' + comment.name + ' : </strong>' +
-	            comment.commentContent + '<br>(' + comment.logtime + ')';
-
-	        if (comment.name === name) {
-	            commentHtml += 
-	                '<button class="options-btn" data-seq="' + comment.seq_comment + '">⋯</button>';
-	        }
-
-	        commentHtml += '</div>';
-
-	        $('#comment-list').append(commentHtml);
-	    });
-	    
-	    // 댓글 개수 업데이트
-	    updateCommentCount(commentList.length);
-
-	    // 댓글이 5개 이상일 때 스크롤 추가
-	    if (commentList.length > 5) {
-	        $('#comment-list').css('overflow-y', 'scroll');
-	    } else {
-	        $('#comment-list').css('overflow-y', 'visible');
-	    }
-	}
-
-	$(document).on('click', '.options-btn', function(event) {
-	    event.preventDefault();
-	    var $commentContent = $(this).parent();
-	    
-	    var seqComment = $(this).data('seq');  
-	    var $editDeleteDiv = $commentContent.find('.edit-delete');
-	    
-	    // 수정/삭제 버튼이 있는지 확인
-	    if ($editDeleteDiv.length > 0) {
-	        $editDeleteDiv.slideToggle(200);
-	    } else {
-	        // 수정/삭제 버튼을 처음으로 추가
-	        var editDeleteHtml = 
-	            '<div class="edit-delete" style="margin-top: 5px; display: none;">' +
-	            '<input type="button" id="edit-btn" class="edit-btn" data-seq="' + seqComment + '" value="수정">' +
-	            '<input type="button" class="delete-btn" data-seq="' + seqComment + '" value="삭제">' + // 클래스 변경
-	            '</div>';
-	            
-	        $commentContent.append(editDeleteHtml);
-	        $commentContent.find('.edit-delete').slideDown(200);
-	    }
-	});
-
-	// 삭제 버튼 클릭 이벤트
-	$(document).on('click', '.delete-btn', function(event) {
-	    event.preventDefault();
-	    var seqComment = $(this).data('seq');
-	    console.log("너는 값이뭐니? ", seqComment);  // seqComment 확인
-	    var seqBoard = $('#seq_board').val(); 
-	    var confirmation = confirm("댓글을 삭제할까요?");
-	    if (confirmation) {
-	        $.ajax({
-	            type: 'POST',
-	            url: '${pageContext.request.contextPath}/comment/commentDelete.do',
-	            data: { 
-	                'seq_comment': seqComment,
-	                'seq_board': seqBoard  
-	            },
-	            success: function(response) {
-	                alert("댓글이 삭제되었습니다.");
-	                onLoadpage();
-	            },
-	            error: function(error) {
-	                console.log("댓글 삭제 실패: ", error);
-	            }
-	        });
-	    } else {
-	        console.log("삭제가 취소되었습니다.");
-	    }
-	});
-
-
-	// 수정 버튼 클릭 이벤트
-	$(document).on('click', '#edit-btn', function(event) {
-	    event.preventDefault();
-	    
-	    // 클릭된 댓글 영역
-	    var $commentContent = $(this).closest('#comment-content');  
-	    
-	    // seq_comment 가져오기
-	    var seqComment = $(this).data('seq');
-	    
-	    console.log("seq :" ,seqComment);
-	    
-	    // 댓글 내용을 포함하는 태그에서 텍스트를 가져오기
-		 var currentComment = $commentContent.clone()    // 요소 복제
-							  .children().remove().end()    // 모든 자식 요소 제거
-							  .text().trim()    // 남은 텍스트 가져오기
-							  .replace(/\s*\([^)]*\)\s*$/, '')  // 마지막 괄호 안의 내용 제거
-							  .trim();  // 앞뒤 공백 제거
-							  
-	    console.log("currentComment :" ,currentComment);
-	    
-		var editHtml = 
-	    '<textarea id="edit-comment">' + currentComment + '</textarea>' +
-	    '<button id="save-edit-btn" data-seq="' + seqComment + '">저장</button>' +
-	    '<button id="cancel-edit-btn">취소</button>';
-	            
-	    // 기존 댓글 내용을 수정 창으로 교체
-	    $commentContent.html(editHtml);
-	});
-
-
-
-	// 수정 저장 버튼 클릭 이벤트
-	$(document).on('click', '#save-edit-btn', function(event) {
-	    event.preventDefault();
-	    
-	    var seqComment = $(this).data('seq');
-	    var updatedComment = $('#edit-comment').val();  // 수정된 댓글 내용
-	    var seqBoard = $('#seq_board').val();  // 게시글 고유번호
-	    
-	    
-	    
-	    $.ajax({
-	        type: 'POST',
-	        url: '${pageContext.request.contextPath}/comment/commentUpdate.do',  // 수정 처리 URL
-	        data: { 
-	            'seq_comment': seqComment,
-	            'seq_board': seqBoard,
-	            'commentContent': updatedComment  // 수정된 댓글 내용
-	        },
-	        success: function(response) {
-	            alert("댓글이 수정되었습니다.");
-	            onLoadpage();  // 페이지 새로고침 또는 댓글 목록 업데이트
-	        },
-	        error: function(error) {
-	            console.log("댓글 수정 실패: ", error);
-	            console.log("seqComment : ", seqComment);
-	            console.log("updatedComment : ", updatedComment);
-	            console.log("seqBoard : ", seqBoard);
-	            
-	        }
-	    });
-	});
-
-	// 수정 취소 버튼 클릭 이벤트
-	$(document).on('click', '#cancel-edit-btn', function(event) {
-	    event.preventDefault();
-	    
-	    // 수정 취소 시, 기존 댓글 내용으로 돌아가도록 처리
-	    onLoadpage();  // 페이지 새로고침 또는 댓글 목록 업데이트
-	});
-
+	<script src="${pageContext.request.contextPath}/js/board/boardView.js"></script>
+	<script>
+		function closePage() {
+			window.history.back(); // 이전 페이지로 돌아가기
+		}
 	</script>
+	<script>
+		const contextPath = '${pageContext.request.contextPath}';
+	</script>
+	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/searchPage/boardSearchPage.js"></script>
 </body>
 </html>

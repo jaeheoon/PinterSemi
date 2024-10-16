@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/boardWriteForm.css">
+<link rel="stylesheet" type="text/css" href="../css/boardUpdateForm.css">
 </head>
 <body>
 	<jsp:include page="../component/header.jsp" />
+	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
 	<div class="container">
 		<div class="card">
 			<!-- 헤더 -->

@@ -10,7 +10,7 @@ function handleLogin(event) {
     else if($('#loginPassword').val() == ''){
 		$('#loginPwdDiv').html('비밀번호 입력');
 		document.getElementById("loginPwdDiv").focus();	
-	}        
+	}
     else
         $.ajax({
             type: 'post',

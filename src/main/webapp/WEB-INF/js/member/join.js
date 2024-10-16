@@ -14,7 +14,7 @@ $('#id').focusout(function() {
     } else {
         $.ajax({
             type: 'post',
-            url: '/Inbeomstagram/member/checkId.do',
+            url: '/Inbeomstagram/member/checkId',
             data: 'id=' + idValue,
             dataType: 'text',
             success: function(data) {
@@ -45,11 +45,20 @@ $('#password').focusout(function() {
 });
 
 //이메일
-function change() {
-	document.getElementById("email2").value = document.getElementById("email3").value;
-}
+$('#email3').on('input', function() {
+	let selectedValue = $(this).val(); // 선택된 값 가져오기
+	if (selectedValue !== '직접입력') { // '직접입력'이 아닌 경우에만 동작
+	    $('#email2').val(selectedValue); // email2 필드에 값 입력
+	    $('#email2').prop('readonly', true); // email2 필드를 읽기 전용으로 설정
+	} else {
+	    $('#email2').val(''); // email2 필드를 비우기
+	    $('#email2').prop('readonly', false); // email2 필드의 읽기 전용 해제
+	}
+});
 
-
+$('#email3').on('click', function() {
+	$('#email3').val('');
+});
 
 // 회원가입
 function checkJoin() {
@@ -138,11 +147,11 @@ function checkJoin() {
     // 모든 조건이 통과하면 서버로 데이터 전송
     $.ajax({
         type: 'post',
-        url: '/Inbeomstagram/member/join.do',
+        url: '/Inbeomstagram/member/join',
         data: $('#joinForm').serialize(),
         success: function() {
             alert('회원가입을 축하합니다.');
-            location.href = '/Inbeomstagram/index.jsp';
+            location.href = '/Inbeomstagram/';
         },
         error: function(e) {
             console.log(e);

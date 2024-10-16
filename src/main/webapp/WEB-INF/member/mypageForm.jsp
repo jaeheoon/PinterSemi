@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div class="update">
-			<a href="${pageContext.request.contextPath}/member/updateForm.do"><input type="button" value="프로필 수정"/></a>
+			<a href="/Inbeomstagram/member/updateForm"><input type="button" value="프로필 수정"/></a>
 		</div>
 		<div class="save">
 			생성됨
@@ -36,7 +36,6 @@
 		<!-- 작성한 이미지 출력 -->
 		<div id="boardbody">
         	<div id="board-list">
-
         	</div>
         </div>
 	</div>
@@ -47,7 +46,7 @@ $(document).ready(function() {
     let seq_member = '${memDTO.seq_member}';
     $.ajax({
         type: "POST",
-        url: "/Inbeomstagram/member/mypageSup.do",
+        url: "/Inbeomstagram/member/mypageSup",
         data: { 'seq_member': seq_member },
         dataType: 'json',
         success: function(data) {
@@ -56,8 +55,8 @@ $(document).ready(function() {
 
             if (data.mypagelist && data.mypagelist.length > 0) {
                 data.mypagelist.forEach(function(item) {
-                    let imageUrl = "http://localhost:8080/Inbeomstagram/storage/" + item.image;
-                    let postUrl = "${pageContext.request.contextPath}/board/boardView.do?seq_board=" + item.seq_board;
+                    let imageUrl = "/Inbeomstagram/storage/" + item.image;
+                    let postUrl = "/Inbeomstagram/board/boardView?seq_board=" + item.seq_board;
                     
                     let imgElement = $("<img>").attr("src", imageUrl).addClass("mypage-image");
                     let linkElement = $("<a>").attr("href", postUrl).append(imgElement);
@@ -69,14 +68,14 @@ $(document).ready(function() {
 
                 let createPinButton = $("<button type='button'>").text("핀 만들기").addClass("create-pin-button");
                 createPinButton.on("click", function() {
-                    window.location.href = "${pageContext.request.contextPath}/board/boardWriteForm.do";
+                    window.location.href = "/Inbeomstagram/board/writeForm";
                 });
 
                 boardList.append(createPinButton);  // 버튼을 메시지 아래에 추가
             }
         },
         error: function(e) {
-            console.log('실패', e);
+            console.log('실패 ', e);
         }
     });
 });

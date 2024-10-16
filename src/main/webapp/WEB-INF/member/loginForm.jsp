@@ -35,4 +35,4 @@
 		</div>
 	</div>
 </div>
-<script src="${pageContext.request.contextPath}/js/member/login.js"></script>
+<script src="/Inbeomstagram/js/member/login.js"></script>

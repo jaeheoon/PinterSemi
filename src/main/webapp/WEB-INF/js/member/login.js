@@ -14,7 +14,7 @@ function handleLogin(event) {
     else
         $.ajax({
             type: 'post',
-            url: '/Inbeomstagram/member/login.do',  // URL은 pageContext가 없으므로 절대 경로로 변경
+            url: '/Inbeomstagram/member/login',  // URL은 pageContext가 없으므로 절대 경로로 변경
             data: {
                 'id': $('#loginId').val(),
                 'password': $('#loginPassword').val()
@@ -26,7 +26,7 @@ function handleLogin(event) {
                     $('#loginResult').css('font-size', '12pt');
                     $('#loginResult').css('padding', '10px');
                 } else {
-                    location.href = '/Inbeomstagram/index.do';
+                    location.href = '/Inbeomstagram/';
                 }
             },
             error: function(e){

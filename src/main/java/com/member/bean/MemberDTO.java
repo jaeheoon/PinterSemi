@@ -13,9 +13,22 @@ public class MemberDTO {
 	private String id;
 	private String password;
 	private String gender;
-	private String email;  // email1 + email2
-	private String phoneNumber; // tel1+tel2+tel3
+	private String email; 		 // email1 + email2
+	private String phoneNumber;  // tel1+tel2+tel3
 	private String zipcode;
-	private String address;  // add1 + add2
+	private String address; 	 // add1 + add2
+	private String admin;
 	private Date logtime;
+	
+	@Override
+	public String toString() {
+		return "이름 : " + name
+			 + " 아이디 : " + id
+			 + " 비밀번호 : " + password
+			 + " 성별 : " + gender
+			 + " 이메일 : " + email
+			 + " 핸드폰 : " + phoneNumber
+			 + " 코드 : " + zipcode
+			 + " 주소 : " + address;
+	}
 }

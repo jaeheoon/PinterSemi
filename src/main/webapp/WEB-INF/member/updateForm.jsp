@@ -88,7 +88,7 @@
 				        <input type="text" name="email2" id="updateemail2" value="${fn:split(sessionScope.memDTO.email, '@')[1]}">
 				    </div>
 				    <div class="input-container">
-				        <input type="email" name="email3" id="updateemail3" list="email3_list" oninput="change()">        
+				        <input type="email" name="email3" id="updateemail3" list="email3_list" >        
 				        <datalist id="email3_list">
 				            <option value="직접입력"></option>
 				            <option value="naver.com"/>
@@ -167,7 +167,7 @@
 <script type="text/javascript">
 window.onload = function(){
 	document.updateForm.gender['${sessionScope.memDTO.gender}'].checked = true;
-	document.updateForm.tel1.value = '${fn:split(sessionScope.memDTO.phoneNumber, '-')[0]}';
+	document.updateForm.updatetel1.value = '${fn:split(sessionScope.memDTO.phoneNumber, '-')[0]}';
 }
 </script>
 </body>

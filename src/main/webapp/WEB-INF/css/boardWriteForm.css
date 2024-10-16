@@ -1,0 +1,136 @@
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #ffffff;
+}
+* {
+    box-sizing: border-box;
+}
+/* 전체 컨테이너 */
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	padding: 20px;
+	background-color: #ffffff;
+}
+
+/* 카드 박스 */
+.card {
+	background-color: #fff;
+	width: 900px; /* 카드 너비 증가 */
+	border-radius: 16px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+
+/* 헤더 */
+.card-header {
+	padding: 20px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-header h2 {
+	margin: 0;
+	font-size: 24px; /* 헤더 글자 크기 증가 */
+	font-weight: 600;
+}
+
+.closeBtn {
+	font-size: 24px; /* 닫기 버튼 글자 크기 증가 */
+	cursor: pointer;
+}
+
+/* 컨텐츠 영역 */
+.card-content {
+	display: flex;
+	padding: 30px; /* 패딩 증가 */
+	gap: 30px; /* 간격 증가 */
+}
+
+/* 이미지 업로드 박스 */
+.image-upload {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px dashed #ddd;
+	border-radius: 12px;
+	height: 410px; /* 이미지 영역 높이 */
+	background-color: #f9f9f9;
+	cursor: pointer;
+	text-align: center;
+	overflow: hidden; /* 이미지가 넘치지 않도록 */
+}
+
+.image-upload img {
+	width: 100%; /* 이미지의 너비를 100%로 설정 */
+	height: 100%; /* 이미지의 높이를 100%로 설정 */
+	object-fit: cover; /* 비율을 유지하면서 크기를 맞춤 */
+}
+
+.image-upload input[type="file"] {
+	display: none; /* 파일 입력 필드 숨기기 */
+}
+
+
+/* 입력 폼 */
+.form {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 20px; /* 간격 증가 */
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group label {
+	margin-bottom: 10px; /* 간격 증가 */
+	font-weight: 600;
+	font-size: 16px; /* 레이블 글자 크기 증가 */
+}
+
+.form-group input, .form-group textarea {
+	padding: 15px; /* 패딩 증가 */
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 16px; /* 입력란 글자 크기 증가 */
+}
+
+.form-group textarea {
+	resize: none;
+	height: 250px; /* 설명 입력란 높이 증가 */
+}
+
+.boardWriteBtn {
+	padding: 15px 25px; /* 버튼 패딩 증가 */
+	background-color: #e60023;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	text-align: center;
+	font-size: 16px; /* 버튼 글자 크기 증가 */
+	margin-top: 10px;
+}
+
+.boardUpdateBtn{
+	padding: 15px 25px; /* 버튼 패딩 증가 */
+	background-color: #e60023;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	text-align: center;
+	font-size: 16px; /* 버튼 글자 크기 증가 */
+	margin-top: 10px;
+}

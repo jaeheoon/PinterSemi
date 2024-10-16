@@ -21,11 +21,14 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.ncp.PinterSemi
-										  com.user.controller"/>
+										  com.member.controller
+										  com.board.controller
+										  com.comment.controller
+										  "/>
 	
 	<!-- DispatcherServlet으로 못가게끔 설정 -->
 	<resources location="/WEB-INF/css/" mapping="/css/**"></resources>
 	<resources location="/WEB-INF/js/" mapping="/js/**"></resources>
-	<resources location="/WEB-INF/image/" mapping="/image/**"></resources>
+	<resources location="/WEB-INF/img/" mapping="/img/**"></resources>
 	<resources location="/WEB-INF/storage/" mapping="/storage/**"></resources>
 </beans:beans>

@@ -14,7 +14,7 @@ import com.comment.bean.CommentDTO;
 import com.comment.service.CommentService;
 
 @Controller
-@RequestMapping("/pin/comment")
+@RequestMapping("/comment")
 public class CommentController {
 	@Autowired
 	private CommentService commentService;

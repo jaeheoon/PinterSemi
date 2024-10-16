@@ -13,7 +13,7 @@
             <jsp:include page="mainPage/mainPage.jsp" />
         </c:when>
         <c:otherwise>
-            <c:redirect url="/searchPage/searchPage.do" />
+            <c:redirect url="/board/searchPage" />
         </c:otherwise>
     </c:choose>
 </body>

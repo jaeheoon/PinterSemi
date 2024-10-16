@@ -48,16 +48,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for=email>이메일</label><br> <input type="email"
-							name="email1"> @ <input type="text" name="email2"
-							id="email2"> <input type="email" name="email3"
-							id="email3" list="email3_list" oninput="change()">
+						<label for=email>이메일</label><br> 
+						<input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
+						<input type="email" name="email3" id="email3" list="email3_list" >
 						<datalist id="email3_list">
-							<option value="직접입력"></option>
-							<option value="naver.com" />
-							<option value="gmail.com" />
-							<option value="daum.net" />
-						</datalist>
+						 	 <option value="직접입력">
+						 	 <option value="hanmail.com">
+						 	 <option value="naver.com">
+						 	 <option value="gmail.com">
+						 </datalist>
 						<div id="emailDiv"></div>
 					</div>
 					<div class="form-group">

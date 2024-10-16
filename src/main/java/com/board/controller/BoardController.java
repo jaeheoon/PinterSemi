@@ -34,6 +34,9 @@ public class BoardController {
 		return model;
 	}
 	
-	
+	@RequestMapping("/searchPage")
+	public String searchPage() {
+		return "/searchPage/searchPage";
+	}
 
 }

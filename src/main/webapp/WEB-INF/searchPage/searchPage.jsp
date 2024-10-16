@@ -13,7 +13,7 @@
 <body>
 	<c:choose>
 		<c:when test="${memDTO == null}">
-			<c:redirect url="/index.do" />
+			<c:redirect url="/" />
 		</c:when>
 		<c:otherwise>
 			<jsp:include page="../component/header.jsp" />

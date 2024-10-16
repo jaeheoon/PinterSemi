@@ -10,6 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<context:component-scan base-package="com.member.service.impl
+										  com.member.kakao.service
 										  com.board.service.impl
 										  com.comment.service.impl
 										  spring.conf"/>

@@ -1,5 +1,6 @@
 package com.member.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
+import com.member.kakao.service.KaKaoService;
 import com.member.service.MemberService;
 
 @Controller
@@ -22,6 +25,8 @@ import com.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private KaKaoService kaKaoService;
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -86,5 +91,23 @@ public class MemberController {
 	@RequestMapping(value = "/updateForm")
 	public String updateForm() {
 		return "/member/updateForm";
+	}
+	
+	@RequestMapping(value = "/kakao/login")
+	public String getCI(@RequestParam String code, Model model) throws IOException {
+		System.out.println("code = " + code);
+		String access_token = kaKaoService.getToken(code); 
+		System.out.println("access_token : " + access_token);
+        Map<String, Object> userInfo = kaKaoService.getUserInfo(access_token);
+        System.out.println("id : " + userInfo.get("id"));
+        System.out.println("nickname : " + userInfo.get("nickname"));
+        System.out.println("email : " + userInfo.get("email"));
+        System.out.println("profile_image : " + userInfo.get("profile_image"));
+        
+        model.addAttribute("code", code);
+        model.addAttribute("access_token", access_token);
+        model.addAttribute("userInfo", userInfo);
+        
+		return "redirect:/";
 	}
 }

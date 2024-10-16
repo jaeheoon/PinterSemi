@@ -9,11 +9,11 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/header.css">
+	href="/Inbeomstagram/css/header.css">
 <header>
 	<div class="logo">
-		<a href="${pageContext.request.contextPath}/index.do"> <!-- 홈으로 이동할 수 있는 로고 -->
-			<img alt="home으로 이동" src="img/logo.png" width="100"
+		<a href="${pageContext.request.contextPath}/"> <!-- 홈으로 이동할 수 있는 로고 -->
+			<img alt="home으로 이동" src="/Inbeomstagram/img/logo.png" width="100"
 			height="30">
 		</a>
 	</div>
@@ -23,11 +23,11 @@
 		<c:if test="${not empty sessionScope.memDTO}">
 			<nav class="navigation">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/board/boardWriteForm.do">핀 생성</a></li>
+					<li><a href="/Inbeomstagram/board/boardWriteForm">핀 생성</a></li>
 				</ul>
 			</nav>
                 <div class="search-box">
-                    <img src="img/search.jpg" alt="serch">
+                    <img src="/Inbeomstagram/img/search.jpg" alt="serch">
                     <input type="text" name="searchKeyword" id="searchKeyword" placeholder="검색에 필요한 제목을 기입해주세요">
                 </div>
 		</c:if>
@@ -40,9 +40,9 @@
 		</c:if>
 		<c:if test="${not empty sessionScope.memDTO}">
 			<a
-				href="${pageContext.request.contextPath}/popularPage/popularPage.do"
+				href="/Inbeomstagram/popularPage/popularPage"
 				class="info">인기 게시글</a>
-			<a href="${pageContext.request.contextPath}/member/mypageForm.do"
+			<a href="/Inbeomstagram/member/mypageForm"
 				class="info">${memDTO.name }님</a>
 			<button onclick="logout()" class="logout">로그아웃</button>
 		</c:if>

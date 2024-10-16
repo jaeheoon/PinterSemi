@@ -12,11 +12,20 @@ $('#updatepwd').focusout(function() {
 });
 
 //이메일
-function change() {
-	document.getElementById("updateemail2").value = document.getElementById("updateemail3").value;
-}
+$('#updateemail3').on('input', function() {
+	let selectedValue = $(this).val(); // 선택된 값 가져오기
+	if (selectedValue !== '직접입력') { // '직접입력'이 아닌 경우에만 동작
+	    $('#updateemail2').val(selectedValue); // email2 필드에 값 입력
+	    $('#updateemail2').prop('readonly', true); // email2 필드를 읽기 전용으로 설정
+	} else {
+	    $('#updateemail2').val(''); // email2 필드를 비우기
+	    $('#updateemail2').prop('readonly', false); // email2 필드의 읽기 전용 해제
+	}
+});
 
-
+$('#updateemail3').on('click', function() {
+	$('#updateemail3').val('');
+});
 // 회원정보 수정
 $(document).ready(function() {
     $('#updatebutton').click(function(){
@@ -77,11 +86,11 @@ $(document).ready(function() {
         // 모든 조건이 통과하면 서버로 데이터 전송
         $.ajax({
             type: 'post',
-            url: '/Inbeomstagram/member/update.do',
+            url: '/Inbeomstagram/member/update',
             data: $('#updateForm').serialize(),
             success: function() {
                 alert('회원정보가 성공적으로 수정되었습니다.');
-                location.href = '/Inbeomstagram/index.jsp';
+                location.href = '/Inbeomstagram/';
             },
             error: function(e) {
                 console.log(e);

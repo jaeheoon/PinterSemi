@@ -9,5 +9,6 @@ CREATE TABLE Member (
     phonenumber VARCHAR(20),     -- 전화번호 (tel1 + tel2 + tel3)
     zipcode VARCHAR(10),          -- 우편번호
     address VARCHAR(300),         -- 주소 (add1 + add2)
+    admin ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
     logtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP   -- 회원 가입 시간
 );

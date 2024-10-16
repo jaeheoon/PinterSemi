@@ -30,5 +30,6 @@
 	<resources location="/WEB-INF/css/" mapping="/css/**"></resources>
 	<resources location="/WEB-INF/js/" mapping="/js/**"></resources>
 	<resources location="/WEB-INF/img/" mapping="/img/**"></resources>
+	<resources location="/WEB-INF/font/" mapping="/font/**"></resources>
 	<resources location="/WEB-INF/storage/" mapping="/storage/**"></resources>
 </beans:beans>

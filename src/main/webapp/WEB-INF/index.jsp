@@ -1,28 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="./css/index.css">
+    <meta charset="UTF-8">
+    <title>InbeomStarGram</title>
 </head>
 <body>
-	<div id="container-header">
-		<a href="/pin/">
-			<img id="mang" alt="망그러진곰" src="./image/mangom3.png">
-		</a>
-	</div>
-	<div id="container">
-		<div id="section">
-			<h2>*** 메인화면 ***</h2>
-			<h3>
-				<a href="/pin/user/writeForm">입력</a>
-				<a href="/pin/user/list">출력</a>
-			</h3>
-		</div>
-	</div>
+    <jsp:include page="component/header.jsp" />
+    <c:choose>
+        <c:when test="${memDTO == null}">
+            <jsp:include page="mainPage/mainPage.jsp" />
+        </c:when>
+        <c:otherwise>
+            <c:redirect url="/searchPage/searchPage.do" />
+        </c:otherwise>
+    </c:choose>
 </body>
 </html>
-<!-- 
-	Spring Framework + Maven + MySQL + MyBatis(@Mapper 사용) + JSP (JQuery) + NCP
- -->

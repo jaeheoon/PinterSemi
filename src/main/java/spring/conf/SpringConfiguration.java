@@ -15,22 +15,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.board.bean.BoardDTO;
-import com.board.service.impl.BoardServiceImpl;
 import com.comment.bean.CommentDTO;
-import com.user.bean.UserDTO;
+import com.member.bean.MemberDTO;
 
-/*
- * 스프링 applicationContext 역할을 하는 클래스
- */
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:spring/db.properties")
-@MapperScan("com.user.dao")
+@MapperScan("com.member.dao com.board.dao com.comment.dao")
 public class SpringConfiguration {
 	private @Value("${jdbc.driver}") String driver;
 	private @Value("${jdbc.url}") String url;
@@ -40,8 +35,8 @@ public class SpringConfiguration {
 	private ApplicationContext applicationContext;
 	
 	@Bean
-	public List<UserDTO> arrayList() {
-		return new ArrayList<UserDTO>();
+	public List<MemberDTO> arrayList() {
+		return new ArrayList<MemberDTO>();
 	}
 	
 	@Bean
@@ -58,10 +53,8 @@ public class SpringConfiguration {
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource());
-		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("spring/mybatis-config.xml"));
-		sqlSessionFactoryBean.setMapperLocations(
-	    		  applicationContext.getResources("classpath:mapper/*Mapper.xml")
-	    		  );
+		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/*Mapper.xml"));
+		sqlSessionFactoryBean.setTypeAliasesPackage("*.*.bean");
 		return sqlSessionFactoryBean.getObject();	//sqlSessionFactory 변환
 	}
 	
@@ -79,20 +72,18 @@ public class SpringConfiguration {
 	
 	@Bean
 	@Scope("prototype")
-	public UserDTO userDTO() {
-		return new UserDTO();
+	public MemberDTO userDTO() {
+		return new MemberDTO();
 	}
 	
-	// Board
 	@Bean
+	@Scope("prototype")
 	public BoardDTO boardDTO() {
 		return new BoardDTO();
 	}
+	
 	@Bean
-	public BoardServiceImpl boardServiceImpl() {
-		return new BoardServiceImpl();
-	}
-	@Bean
+	@Scope("prototype")
 	public CommentDTO commentDTO() {
 		return new CommentDTO();
 	}

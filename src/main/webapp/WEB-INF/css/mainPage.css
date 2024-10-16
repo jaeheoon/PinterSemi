@@ -1,0 +1,128 @@
+@font-face {
+    font-family: 'BlinkMacSystemFont-Black'; /* 폰트의 이름 정의 */
+    src: url('/Inbeomstagram/font/BlinkMacSystemFont-Black.woff') format('woff');   /* woff 파일 경로 */
+    font-weight: normal; /* 폰트의 굵기 */
+    font-style: normal; /* 폰트의 스타일 */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;  /* 가로 스크롤을 없앰 */
+    font-family: 'BlinkMacSystemFont-Black', sans-serif;
+}
+
+/* main 요소에 상단 마진 추가하여 헤더와 겹치지 않게 함 */
+main {
+    margin-top: 80px; /* 헤더 높이만큼 여백 */  
+    width: 100%; /* 너비 100% */
+}
+
+.item {
+    background: white; /* 아이템 배경색 */
+    padding: 10px; /* 아이템 패딩 */
+    width: 100%; /* 아이템 너비 100% */
+    height: 865px;
+}
+
+/* 가로로 6개 이미지를 배치하는 부분 */
+.horizontal-gallery .image-wrapper {
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 사진 사이 간격 조절 */
+    gap: 10px; /* 이미지 간의 간격 */
+}
+
+.horizontal-gallery img {
+    width: calc(100% / 6 - 10px); /* 6개의 이미지를 균등하게 배치 */
+    height: auto;
+    border-radius: 5px;
+}
+
+.item.event {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: #fffd92;
+}
+
+.item.event1 {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    background-color: #dafff6;
+}
+
+.event-content {
+    display: flex; /* 내부 컨텐츠도 Flexbox 사용 */
+    width: 600%;
+    padding-left: 200px;
+}
+
+.event-content1 {
+    display: flex; /* 내부 컨텐츠도 Flexbox 사용 */
+    width: 600%;
+    padding-right: 200px;
+}
+
+.event-image {
+    width: 100%; /* 이미지 너비를 설정 */
+    height: auto; /* 비율 유지 */
+}
+
+.event-description {
+    padding-left: 200px; /* 이미지와 설명 간격 */
+    width: 900%; /* 설명 영역의 너비 설정 */
+}
+
+.event-description1 {
+    padding-left: 1px; /* 이미지와 설명 간격 */
+    width: 1100%; /* 설명 영역의 너비 설정 */
+}
+
+.item img {
+    width: 100%; /* 이미지 너비 100% */
+    height: auto; /* 비율 유지 */
+    border-radius: 5px; /* 이미지 모서리 둥글게 */
+}
+
+h2 {
+    font-size: 4em; /* 제목 폰트 크기 */
+    margin-top: 10px; /* 제목 상단 여백 */
+    text-align: center; /* 제목 중앙 정렬 */
+    color: #c31952;
+}
+
+.geed {
+    font-size: 4em; /* 제목 폰트 크기 */
+    margin-top: 10px; /* 제목 상단 여백 */
+    text-align: center; /* 제목 중앙 정렬 */
+    color: #006b6c;
+}
+
+p {
+    font-size: 1.5em; /* 설명 폰트 크기 */
+    text-align: center; /* 설명 중앙 정렬 */
+    color: #c31952;
+}
+
+.geed1 {
+    font-size: 1.5em; /* 설명 폰트 크기 */
+    text-align: center; /* 설명 중앙 정렬 */
+    color: #006b6c;
+}
+
+/* 슬라이더 */
+.slider {
+    width: 100%; /* 너비 100%로 설정 */
+    height: auto; /* 비율 유지 */
+    overflow: hidden; /* 넘치는 부분 숨기기 */
+}
+
+.slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    transition: transform 1s ease-in-out;
+}

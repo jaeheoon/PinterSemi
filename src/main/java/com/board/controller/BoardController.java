@@ -26,6 +26,7 @@ public class BoardController {
 	public void boardWrite(@RequestParam("data")BoardDTO boardDTO) {
 		boardService.boardWrite(boardDTO);
 	}
+	
 	@RequestMapping("/boardList")
 	public Model getBoardList(Model model){
 		List<BoardDTO>list = boardService.getBoardList();	

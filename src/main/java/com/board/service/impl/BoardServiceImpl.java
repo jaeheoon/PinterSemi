@@ -15,8 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.board.bean.BoardDTO;
 import com.board.dao.BoardDAO;
 import com.board.service.BoardService;
-
-import com.object.service.ObjectStorageService;
+import com.member.ncp.service.ObjectStorageService;
 
 @Service
 public class BoardServiceImpl implements BoardService {	

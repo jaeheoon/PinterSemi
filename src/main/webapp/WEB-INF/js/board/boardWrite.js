@@ -46,11 +46,11 @@ $('.boardWriteBtn').click(function() {
          enctype: 'multipart/form-data',
          processData: false,
          contentType: false,
-         url: '/Inbeomstagram/board/boardWrite.do',
+         url: '/Inbeomstagram/board/write',
          data: formData,
          success: function() {
             alert('이미지 등록 완료');
-            location.href = '/Inbeomstagram/index.do';
+            location.href = '/Inbeomstagram/index';
          },
          error: function(e) {
             console.log(e);

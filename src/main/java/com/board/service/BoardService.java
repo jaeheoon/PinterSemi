@@ -3,17 +3,16 @@ package com.board.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.board.bean.BoardDTO;
 
 public interface BoardService {
-	public void boardWrite(BoardDTO boardDTO);
-	public List<BoardDTO> getBoardList();
-	public List<BoardDTO>getBoardPagingList(int startRow, int endRow);
-	public List<BoardDTO>getBoardPopularPagingList(int startRow, int endRow);
-	public BoardDTO getBoard(long seq_board);
-	public void boardUpdate(BoardDTO boardDTO);
-	public void boardDelete(long seq_board);
-	public void boardUpdateNotImage(BoardDTO boardDTO);
-	public List<BoardDTO> getMyBoardList(long seq_member);
-	public List<BoardDTO> searchBoardPagingList(Map<String, Object> map);
+	public void boardWrite(BoardDTO boardDTO, MultipartFile image);
+	public List<BoardDTO>getBoardPagingList(String start);
+	public BoardDTO getBoard(String seq_board);
+	public void boardUpdate(BoardDTO boardDTO, MultipartFile image);
+	public void boardDelete(String seq_board);
+	public List<BoardDTO> getMyBoardList(String seq_member);
+	public List<BoardDTO> searchBoardPagingList(String keyword, String page);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,7 +22,7 @@ public interface BoardDAO {
 
 	public List<BoardDTO> getBoardList();
 
-	public List<BoardDTO> getBoardPagingList(int startRow, int endRow);
+	public List<BoardDTO> getBoardPagingList(@Param("startRow") int startRow, @Param("endRow") int endRow);
 
 	public List<BoardDTO> getBoardPopularPagingList(int startRow, int endRow);
 

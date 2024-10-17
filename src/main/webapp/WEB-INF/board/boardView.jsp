@@ -26,7 +26,7 @@
 	</div>
 	<div id="main-content">
 		<form id="container" method="POST"
-			action="${pageContext.request.contextPath}/board/boardUpdateForm.do">
+			action="${pageContext.request.contextPath}/board/boardUpdateForm">
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
@@ -144,7 +144,7 @@
 				<c:forEach var="boardDTO" items="${list}">
 					<div class="grid-item">
 						<a
-							href="${pageContext.request.contextPath}/board/boardView.do?seq_board=${boardDTO.seq_board}">
+							href="${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}">
 							<img
 							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
 							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>

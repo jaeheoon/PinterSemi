@@ -49,9 +49,9 @@
 <jsp:include page="../member/loginForm.jsp" />
 <jsp:include page="../member/joinForm.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/logout.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/member/join.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header/header.js"></script>

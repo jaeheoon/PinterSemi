@@ -30,7 +30,6 @@ import com.member.service.kakao.KakaoService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private KakaoService kakaoService;
 	@Autowired
@@ -101,7 +100,6 @@ public class MemberController {
 	public String updateForm() {
 		return "/member/updateForm";
 	}
-
 	
 	@RequestMapping(value = "/kakao/login")
 	public String getCI(@RequestParam String code, Model model) throws IOException {
@@ -144,9 +142,9 @@ public class MemberController {
 	
 	// 인증 이메일 전송
 	@PostMapping("/mailSend")
+	@ResponseBody
     public HashMap<String, Object> mailSend(String mail) {
         HashMap<String, Object> map = new HashMap<>();
-
         try {
             number = mailService.sendMail(mail);
             String num = String.valueOf(number);

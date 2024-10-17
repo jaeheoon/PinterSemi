@@ -35,7 +35,9 @@
             email = #{email},
             phoneNumber = #{phoneNumber},
             zipcode = #{zipcode},
-            address = #{address}
+            address = #{address},
+            userProfile = #{userProfile},
+            userOriginalProfile = #{userOriginalProfile}
         WHERE id = #{id}
     </update>
 

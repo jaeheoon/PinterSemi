@@ -4,6 +4,6 @@ $('#searchKeyword').on('keydown', function(event) {
         let keyword = $('#searchKeyword').val();
 
         // URL에 keyword를 쿼리 파라미터로 추가하여 페이지 이동
-        location.href = '/Inbeomstagram/searchPage/subjectSearchPage.do?keyword=' + encodeURIComponent(keyword);
+        location.href = '/Inbeomstagram/searchPage/searchingPage?keyword=' + encodeURIComponent(keyword);
     }
 });

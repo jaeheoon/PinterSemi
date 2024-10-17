@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 	function loadMoreData(page, keyword) {
 		$.ajax({
-			url: '/Inbeomstagram/searchPage/subjectSearchPage.do',
+			url: '/Inbeomstagram/searchPage/searchingPage',
 			type: 'GET',
 			data: { page: page, keyword: keyword },  // 페이지 번호와 키워드 전달
 			dataType: 'json',
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 			const newItem = `
 		            <div class="grid-item">
-		                <a href="${contextPath}/board/boardView.do?seq_board=${seqBoard}">
+		                <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">
 		                    <img src="${contextPath}/storage/${image}" alt="${imageSubject}" />
 		                    <span class="hit">${hit}</span>
 		                </a>

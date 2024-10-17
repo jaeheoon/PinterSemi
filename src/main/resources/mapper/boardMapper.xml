@@ -5,78 +5,68 @@
 <mapper namespace="com.board.dao.BoardDAO">
  	<!-- 핀 등록 -->
  	<insert id="boardWrite" parameterType="boardDTO">
- 		INSERT INTO board (seq_board, seq_member, image, name, imageSubject, imageContent, hit, logtime)
-        VALUES (seq_board_id.NEXTVAL, #{seq_member}, #{image}, #{name} ,#{imageSubject}, #{imageContent}, 0, SYSDATE)
+ 		INSERT INTO board (seq_member, imageFileName, imageOriginalFileName, name, imageSubject, imageContent)
+        VALUES (#{seq_member}, #{imageFileName}, #{imageOriginalFileName}, #{name}, #{imageSubject}, #{imageContent})
  	</insert>
  	
- 	<!-- 핀 목록 -->
- 	<select id="getBoardList" resultType="boardDTO">
- 		select * from board order by seq_board desc
- 	</select>
- 	
+ 	<!-- 게시물 목록 페이징 -->
  	<select id="getBoardPagingList" resultType="boardDTO">
- 	<![CDATA[
-        SELECT * FROM (
-            SELECT b.*, ROWNUM rnum FROM (
-                SELECT * FROM board ORDER BY seq_board DESC
-            ) b WHERE ROWNUM <= #{endRow}
-        ) WHERE rnum > #{startRow}
-        ]]>
+        SELECT * FROM board
+        ORDER BY seq_board DESC
+        LIMIT #{startRow}, #{endRow}
     </select>
     
+    <!-- 인기 게시물 목록 페이징 -->
     <select id="getBoardPopularPagingList" resultType="boardDTO">
- 	<![CDATA[
-        SELECT * FROM (
-            SELECT b.*, ROWNUM rnum FROM (
-                SELECT * FROM board ORDER BY hit DESC
-            ) b WHERE ROWNUM <= #{endRow}
-        ) WHERE rnum > #{startRow}
-        ]]>
+        SELECT * FROM board
+        ORDER BY hit DESC
+        LIMIT #{startRow}, #{endRow}
     </select>
     
+    <!-- 게시물 총 개수 -->
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*) FROM board
     </select>
  	
- 	<!--핀 뷰 -->
+ 	<!-- 게시물 상세 보기 -->
  	<select id="getBoard" parameterType="long" resultType="boardDTO">
- 		select * from board where seq_board=#{seq_board}
+ 		SELECT * FROM board WHERE seq_board = #{seq_board}
  	</select>
  	
- 	<!-- 핀 수정 -->
+ 	<!-- 게시물 수정 -->
  	<update id="boardUpdate" parameterType="boardDTO">
- 		update board set 
- 		image = #{image}, 
+ 		UPDATE board SET 
+ 		imageFileName = #{imageFileName}, 
+ 		imageOriginalFileName = #{imageOriginalFileName}, 
  		imageSubject = #{imageSubject}, 
  		imageContent = #{imageContent} 
- 		where seq_board = #{seq_board}
+ 		WHERE seq_board = #{seq_board}
  	</update>
  	
+ 	<!-- 게시물 삭제 -->
  	<delete id="boardDelete" parameterType="long">
  		DELETE FROM board WHERE seq_board = #{seq_board}
  	</delete>
  	
+ 	<!-- 이미지 없이 게시물 수정 -->
  	<update id="boardUpdateNotImage" parameterType="boardDTO">
-       update board set
+       UPDATE board SET
        imageSubject = #{imageSubject}, 
        imageContent = #{imageContent} 
-       where seq_board = #{seq_board}
+       WHERE seq_board = #{seq_board}
     </update>
     
-    <!--  마이페이지 내 게시물  -->
+    <!-- 마이페이지 내 게시물 -->
 	<select id="getMyBoardList" parameterType="long" resultType="boardDTO">
-	 	select * from board where seq_member = #{seq_member}
+	 	SELECT * FROM board WHERE seq_member = #{seq_member}
 	</select>
 	
-	<select id="searchBoardPagingList" parameterType="map" resultType="boardDTO">
-	<![CDATA[
-	 	SELECT * FROM (
-	 	 SELECT board.*, ROW_NUMBER()
-	 	 OVER (ORDER BY seq_board DESC) AS rnum
-	 	 FROM board WHERE imagesubject
-	 	 LIKE '%' || #{keyword} || '%' OR
-	 	 imagecontent LIKE '%' || #{keyword} || '%' )
-	 	 WHERE rnum BETWEEN #{startRow} AND #{endRow}
-	 ]]>
+	<!-- 게시물 검색 및 페이징 -->
+	<select id="searchBoardPagingList" parameterType="Map" resultType="boardDTO">
+	 	SELECT * FROM board
+	 	WHERE imageSubject LIKE CONCAT('%', #{keyword}, '%')
+	 	OR imageContent LIKE CONCAT('%', #{keyword}, '%')
+	 	ORDER BY seq_board DESC
+	 	LIMIT #{startRow}, #{endRow}
 	</select>
 </mapper>

@@ -16,7 +16,7 @@
 	<div id="data" data-seq-board="${boardDTO.seq_board}"
 		data-name="${sessionScope.memDTO.name}"
 		data-board-name="${boardDTO.imageSubject}"
-		data-image="${boardDTO.image }"></div>
+		data-image="${boardDTO.imageFileName }"></div>
 	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
 	<div class="back" onclick="closePage()">
 		<button type="button" id="backBtn">
@@ -30,7 +30,7 @@
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
-				id="image" name="image" value="${boardDTO.image}"> <input
+				id="image" name="image" value="${boardDTO.imageFileName}"> <input
 				type="hidden" id="imageSubject" name="imageSubject"
 				value="${boardDTO.imageSubject}"> <input type="hidden"
 				id="imageContent" name="imageContent"
@@ -38,7 +38,7 @@
 				id="password" name="password" value="${memDTO.password}">
 			<div id="image">
 				<img
-					src="http://localhost:8080/Inbeomstagram/storage/${boardDTO.image }" />
+					src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}" />
 			</div>
 			<div id="des">
 				<!-- 제목 -->
@@ -47,7 +47,7 @@
 						viewBox="0 0 512 512">
 					<path
 							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" /></svg>
-					<button type="button" id="scarpBtn"></button>
+					
 					<p style="margin: 0;">${boardDTO.hit}</p>
 					<!-- 나중에 수정해야 함 -->
 					<span id="hitRate"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +65,11 @@
 					</span>
 					</span>
 					<div id="pin-buttons">
+						<c:if test="${not empty memDTO.seq_member }">
+							<c:if test="${memDTO.seq_member != boardDTO.seq_member }">
+								<input type="button" id="scarpBtn" value="저장" />
+							</c:if>
+						</c:if>
 						<c:if test="${memDTO.seq_member == boardDTO.seq_member}">
 							<input type="submit" id="updateBtn" value="수정" />
 							<input type="button" id="deleteBtn" value="삭제" />
@@ -145,7 +150,7 @@
 					<div class="grid-item">
 						<a href="${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}">
 							<img
-							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
+							src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}"
 							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>
 						</a>
 					</div>
@@ -176,5 +181,6 @@
 	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/searchPage/boardSearchPage.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/boardScrap.js"></script>
 </body>
 </html>

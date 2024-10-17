@@ -1,5 +1,6 @@
 package com.board.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.board.bean.BoardDTO;
 import com.board.service.BoardService;
 
@@ -23,8 +25,7 @@ import com.board.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 	@Autowired
-	private BoardService boardService;
-	
+	private BoardService boardService;	
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public void boardWrite(@ModelAttribute BoardDTO boardDTO, @RequestParam("image") MultipartFile image) {		  
@@ -79,6 +80,6 @@ public class BoardController {
 		model.addAttribute(list);
 		return model;
 	}
-	
+
 
 }

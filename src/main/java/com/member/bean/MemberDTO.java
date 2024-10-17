@@ -19,6 +19,8 @@ public class MemberDTO {
 	private String address; 	 // add1 + add2
 	private String admin;
 	private Date logtime;
+	private String userProfile; // 사용자 프로필사진 값
+	private String userOriginalProfile; // 사용자 프로필사진 이름
 	
 	@Override
 	public String toString() {

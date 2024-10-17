@@ -24,10 +24,12 @@
     </select>
     
     <!-- 게시물 총 개수 -->
+
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*) FROM board
     </select>
  	
+
  	<!-- 게시물 상세 보기 -->
  	<select id="getBoard" parameterType="long" resultType="boardDTO">
  		SELECT * FROM board WHERE seq_board = #{seq_board}
@@ -44,10 +46,11 @@
  	</update>
  	
  	<!-- 게시물 삭제 -->
+
  	<delete id="boardDelete" parameterType="long">
  		DELETE FROM board WHERE seq_board = #{seq_board}
- 	</delete>
- 	
+ 	</delete> 	
+
  	<!-- 이미지 없이 게시물 수정 -->
  	<update id="boardUpdateNotImage" parameterType="boardDTO">
        UPDATE board SET
@@ -70,3 +73,4 @@
 	 	LIMIT #{startRow}, #{endRow}
 	</select>
 </mapper>
+

@@ -29,6 +29,7 @@ $('#updateemail3').on('click', function() {
 // 회원정보 수정
 $(document).ready(function() {
     $('#updatebutton').click(function(){
+    	let formData = new FormData($('#updateForm')[0]);
         $('#updatenameDiv').html("");
         $('#updatepwdDiv').html("");
         $('#updateemailDiv').html("");
@@ -86,8 +87,16 @@ $(document).ready(function() {
         // 모든 조건이 통과하면 서버로 데이터 전송
         $.ajax({
             type: 'post',
+<<<<<<< HEAD
             url: '/Inbeomstagram/member/update',
             data: $('#updateForm').serialize(),
+=======
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+            url: '/Inbeomstagram/member/update',
+            data: formData,
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
             success: function() {
                 alert('회원정보가 성공적으로 수정되었습니다.');
                 location.href = '/Inbeomstagram/';
@@ -127,4 +136,29 @@ function checkPost() {
         }
     }).open();
 }
+<<<<<<< HEAD
 
+=======
+//버튼 클릭시 input type=file 클릭효과
+$('#change').click(function(){
+	$('#userProfileImg').trigger('click'); //강제 이벤트 발생
+});
+//이미지 미리보기
+$('#userProfileImg').change(function(){
+	$('#userprofile').empty();
+	for(var i=0; i<this.files.length; i++){
+		readURL(this.files[i]);
+	}
+});
+//이미지 올릴시 div에 이미지 적용
+function readURL(file){
+	var reader = new FileReader();
+	var show;
+	reader.onload = function(e){
+		var img = document.createElement('img');
+        img.src = e.target.result;
+        $('#userprofile').append(img);
+	}
+	reader.readAsDataURL(file);
+}
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6

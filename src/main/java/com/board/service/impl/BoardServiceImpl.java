@@ -1,5 +1,6 @@
 package com.board.service.impl;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.board.bean.BoardDTO;
 import com.board.dao.BoardDAO;
 import com.board.service.BoardService;
+
 import com.object.service.ObjectStorageService;
 
 @Service
@@ -93,6 +96,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		map.put("keyword", keyword);
+
 		return boardDAO.searchBoardPagingList(map);
 	}
 

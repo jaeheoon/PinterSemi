@@ -1,15 +1,32 @@
 package com.member.service.impl;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+=======
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 
 import com.board.bean.BoardDTO;
 import com.board.dao.BoardDAO;
 import com.member.bean.MemberDTO;
 import com.member.dao.MemberDAO;
+<<<<<<< HEAD
+=======
+import com.member.ncp.service.ObjectStorageService;
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 import com.member.service.MemberService;
 
 @Service
@@ -18,7 +35,16 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 	@Autowired
 	private BoardDAO boardDAO;
+<<<<<<< HEAD
 	
+=======
+	@Autowired
+	private HttpSession session;
+	@Autowired
+	private ObjectStorageService objectStorageService;
+	
+	private String bucketName = "bitcamp-9th-pinter";
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 	@Override
 	public boolean checkId(String id) {
 		MemberDTO memberDTO = memberDAO.isExistId(id);
@@ -43,7 +69,42 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void update(MemberDTO memberDTO) {
+=======
+	public void update(MemberDTO memberDTO, MultipartFile userProfileImg) {
+		String filePath = session.getServletContext().getRealPath("WEB-INF/storage");
+		System.out.println("실제폴더 = " + filePath);
+
+		MemberDTO dto = memberDAO.getMember(memberDTO.getId());
+
+		String userOriginalProfile;
+		String userProfile;
+		File file;
+
+		if(userProfileImg != null) {
+			userProfile = dto.getUserProfile();
+			//NCP 이미지 삭제
+			objectStorageService.deleteFile(bucketName, "storage/", userProfile);
+			//NCP 이미지 올리기
+			userProfile = objectStorageService.uploadFile(bucketName, "storage/", userProfileImg);
+			userOriginalProfile = userProfileImg.getOriginalFilename();
+			file = new File(filePath, userOriginalProfile);
+
+			try {
+				userProfileImg.transferTo(file);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			memberDTO.setUserProfile(userProfile);
+			memberDTO.setUserOriginalProfile(userOriginalProfile);
+		} else { // 업데이트폼에서 이미지를 수정하지 않았을 때
+			memberDTO.setUserProfile(dto.getUserProfile());
+			memberDTO.setUserOriginalProfile(dto.getUserOriginalProfile());
+		}
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 		memberDAO.update(memberDTO);
 	}
 

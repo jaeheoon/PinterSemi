@@ -1,5 +1,7 @@
 package com.member.controller;
 
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,20 +10,25 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
 import com.member.service.MemberService;
+import com.member.service.kakao.KakaoService;
 
 @Controller
 @RequestMapping(value = "/member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private KakaoService kakaoService;
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -86,5 +93,45 @@ public class MemberController {
 	@RequestMapping(value = "/updateForm")
 	public String updateForm() {
 		return "/member/updateForm";
+	}
+
+	
+	@RequestMapping(value = "/kakao/login")
+	public String getCI(@RequestParam String code, Model model) throws IOException {
+		System.out.println("code = " + code);
+		String access_token = kakaoService.getToken(code);
+		System.out.println("access_token : " + access_token);
+        Map<String, Object> userInfo = kakaoService.getUserInfo(access_token);
+        System.out.println("id : " + userInfo.get("id"));
+        System.out.println("nickname : " + userInfo.get("nickname"));
+        System.out.println("email : " + userInfo.get("email"));
+        System.out.println("profile_image : " + userInfo.get("profile_image"));
+        
+        model.addAttribute("code", code);
+        model.addAttribute("access_token", access_token);
+        model.addAttribute("userInfo", userInfo);
+        
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public void update(@ModelAttribute MemberDTO memberDTO,
+						@RequestParam("userProfileImg") MultipartFile userProfileImg,
+						@RequestParam("addr1") String addr1,
+						@RequestParam("addr2") String addr2,
+						@RequestParam("email1") String email1,
+			            @RequestParam("email2") String email2,
+			            @RequestParam("tetel1") String tel1,
+			            @RequestParam("tetel2") String tel2,
+			            @RequestParam("tetel3") String tel3,
+			            HttpSession session) {
+		
+		memberDTO.setAddress(addr1 +","+ addr2);
+		memberDTO.setEmail(email1 + "@" + email2);
+		memberDTO.setPhoneNumber(tel1 + "-" + tel2 + "-" + tel3);
+		
+		memberService.update(memberDTO, userProfileImg);
+		session.setAttribute("memDTO", memberDTO);
 	}
 }

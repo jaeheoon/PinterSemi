@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 			const newItem = `
 		            <div class="grid-item">
-		                <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">
+		                <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">		                
 		                    <img src="${contextPath}/storage/${image}" alt="${imageSubject}" />
 		                    <span class="hit">${hit}</span>
 		                </a>

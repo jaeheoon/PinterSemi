@@ -48,18 +48,18 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for=email>이메일</label><br> 
-						<input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
-						<input type="email" name="email3" id="email3" list="email3_list" >
-						<datalist id="email3_list">
-						 	 <option value="직접입력">
-						 	 <option value="hanmail.com">
-						 	 <option value="naver.com">
-						 	 <option value="gmail.com">
-						 </datalist>
-						<div id="emailDiv"></div>
-						<input type="button" value="인증하기" class="btn btn-primary" id="emailCheck">
-						<input type="hidden" value="" id="emailCheckDiv">
+					    <label for="email">이메일</label><br> 
+					    <input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
+					    <input type="email" name="email3" id="email3" list="email3_list" >
+					    <datalist id="email3_list">
+					        <option value="직접입력">
+					        <option value="naver.com">
+					        <option value="gmail.com">
+					        <option value="hanmail.com">
+					    </datalist>
+					    <div id="emailDiv"></div>
+					    <input type="button" value="인증하기" class="btn btn-primary" id="emailCheck">
+					    <input type="hidden" value="" id="emailCheckDiv">
 					</div>
 					<div class="form-group">
 						<label for="phoneNumber">휴대전화</label> <select name="tel1">
@@ -85,15 +85,12 @@
 						<div id="addrDiv"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							onclick="checkJoin()">회원가입</button>
-						<button type="reset" class="btn btn-secondary">다시작성</button>
+						<button type="button" class="btn btn-primary" onclick="checkJoin()">회원가입</button>
+						<button type="reset" id="reset" class="btn btn-secondary">다시작성</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${pageContext.request.contextPath}/js/member/join.js"></script>

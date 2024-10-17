@@ -16,7 +16,7 @@
 	<div id="data" data-seq-board="${boardDTO.seq_board}"
 		data-name="${sessionScope.memDTO.name}"
 		data-board-name="${boardDTO.imageSubject}"
-		data-image="${boardDTO.image }"></div>
+		data-image="${boardDTO.imageFileName }"></div>
 	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
 	<div class="back" onclick="closePage()">
 		<button type="button" id="backBtn">
@@ -30,7 +30,7 @@
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
-				id="image" name="image" value="${boardDTO.image}"> <input
+				id="image" name="image" value="${boardDTO.imageFileName}"> <input
 				type="hidden" id="imageSubject" name="imageSubject"
 				value="${boardDTO.imageSubject}"> <input type="hidden"
 				id="imageContent" name="imageContent"
@@ -38,7 +38,7 @@
 				id="password" name="password" value="${memDTO.password}">
 			<div id="image">
 				<img
-					src="http://localhost:8080/Inbeomstagram/storage/${boardDTO.image }" />
+					src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}" />
 			</div>
 			<div id="des">
 				<!-- 제목 -->
@@ -145,7 +145,7 @@
 					<div class="grid-item">
 						<a href="${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}">
 							<img
-							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
+							src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}"
 							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>
 						</a>
 					</div>

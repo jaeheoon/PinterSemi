@@ -191,3 +191,7 @@ select[name="tel1"], input[name="tel2"], input[name="tel3"] {
 #zipButton:hover {
     background-color: #c5001e; /* Darken background on hover */
 }
+
+#emailCheck {
+	margin-top: 3%;
+}

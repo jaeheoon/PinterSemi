@@ -159,8 +159,6 @@ function checkJoin() {
     });
 }
 
-
-
 //우편번호 - Daum API
 function checkPost() {
     new daum.Postcode({

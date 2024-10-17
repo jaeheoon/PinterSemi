@@ -22,10 +22,7 @@ public interface BoardDAO {
 
 	public List<BoardDTO> getBoardList();
 
-	public List<BoardDTO> getBoardPagingList(int startRow, int endRow);
-
-	public List<BoardDTO> getBoardPopularPagingList(int startRow, int endRow);
-
+	public List<BoardDTO> getBoardPagingList(Map<String, Object> map);
 	public BoardDTO getBoard(long seq_board);
 
 	public void boardUpdate(BoardDTO boardDTO);

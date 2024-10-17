@@ -31,11 +31,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void boardWrite(BoardDTO boardDTO, MultipartFile image) {
 		imageFileName = objectStorageService.uploadFile(bucketName, "storage/", image);
+		System.out.println("imageFileName : "+imageFileName);
 		imageOriginalFile = image.getOriginalFilename();
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setSeq_member(boardDTO.getSeq_member());
 		dto.setImageContent(boardDTO.getImageContent());
+		dto.setImageFileName(imageFileName);
 		dto.setImageOriginalFileName(imageOriginalFile);
 		dto.setName(boardDTO.getName());
 		dto.setImageSubject(boardDTO.getImageSubject());
@@ -46,10 +48,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDTO> getBoardPagingList(String start) {
-		int page = (start != null) ? Integer.parseInt(start) : 1;
-		int startRow = (page - 1) * page_size; // 0 기반으로 계산
-		int endRow = page * page_size; // 마지막 행은 그대로
-		return boardDAO.getBoardPagingList(startRow, endRow);
+	    int page = (start != null) ? Integer.parseInt(start) : 1; // 기본값 1
+	    int startRow = (page - 1) * page_size; // 0부터 시작
+	    System.out.println("startRow : "+startRow+"/ pageSize : "+page_size);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("startRow", startRow);
+	    map.put("pageSize", page_size); // page_size 추가
+
+	    return boardDAO.getBoardPagingList(map); // 매퍼로 Map 전달
 	}
 
 	@Override
@@ -88,15 +94,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDTO> searchBoardPagingList(String keyword, String page) {
-		int start = Integer.parseInt(page);
-		int startRow = (start - 1) * page_size + 1;
-		int endRow = start * page_size;
-		Map<String, Object> map = new HashMap<>();
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		map.put("keyword", keyword);
+	    int start = (page != null) ? Integer.parseInt(page) : 1; // page가 null인 경우 기본값 1
+	    int startRow = (start - 1) * page_size; // 0부터 시작
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("startRow", startRow);
+	    map.put("pageSize", page_size); // 페이지당 가져올 데이터 수
+	    map.put("keyword", keyword);
 
-		return boardDAO.searchBoardPagingList(map);
+	    return boardDAO.searchBoardPagingList(map);
 	}
 
 }

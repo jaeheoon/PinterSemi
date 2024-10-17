@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let currentPage = 2;  // 1페이지는 서버에서 로드됐으므로 2페이지부터 시작
+    let currentPage = 0;  // 1페이지는 서버에서 로드됐으므로 2페이지부터 시작
     let loading = false;
 
     // 스크롤 이벤트 감지
@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     function loadMoreData(page) {
         $.ajax({
-            url: 'searchPage',
+            url: '/board/searchPage',
             type: 'GET',
             data: { page: page },  // 페이지 번호 전달
             dataType: 'json',
@@ -36,14 +36,14 @@ $(document).ready(function() {
 
         data.forEach(function(boardDTO) {
             const seqBoard = boardDTO.seq_board;
-            const image = boardDTO.image;
+            const image = boardDTO.imageFileName;
             const imageSubject = boardDTO.imageSubject;
             const hit = boardDTO.hit;
 
             const newItem = `
                 <div class="grid-item">
-                    <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">
-                        <img src="${contextPath}/storage/${image}" alt="${imageSubject}" />
+                    <a href="/board/boardView?seq_board=${seqBoard}">
+                        <img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${image}" alt="${imageSubject}" />
                         <span class="hit">${hit}</span>
                     </a>
                 </div>`;

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.board.bean.BoardDTO;
 import com.board.service.BoardService;
@@ -52,19 +52,20 @@ public class BoardController {
 		boardService.boardDelete(seq_board);
 	}
 	@RequestMapping("/boardView")
-	public Model getBoardView(@RequestParam("seq_board")String seq_board, Model model) {
+	public ModelAndView getBoardView(@RequestParam("seq_board")String seq_board) {
 		BoardDTO boardDTO = boardService.getBoard(seq_board);
-		model.addAttribute("boardDTO", boardDTO);
-		return model;
+		ModelAndView mav = new ModelAndView("/board/boardView");
+		mav.addObject("boardDTO", boardDTO);
+		return mav;
 	}
 	
 	// 얘는 그냥 탐색 페이지
 	@RequestMapping("/searchPage")
-	public String getBoardPagingList(@RequestParam(value = "page", required = false)String page, Model model) {
-		List<BoardDTO>list =  boardService.getBoardPagingList(page);
-		model.addAttribute(list);
-		
-		return "/searchPage/searchPage";
+	public ModelAndView getBoardPagingList(@RequestParam(value = "page", required = false) String page) {
+	    List<BoardDTO> list = boardService.getBoardPagingList(page);
+	    ModelAndView mav = new ModelAndView("/searchPage/searchPage");
+	    mav.addObject("list", list);
+	    return mav;
 	}
 	
 	@RequestMapping("/memberPage")

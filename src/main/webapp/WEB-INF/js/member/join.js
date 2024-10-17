@@ -81,11 +81,15 @@ var isEmailVerified = false;
 $(document).on('click', '#verifyEmail', function() {
     let userNumber = $('#userNumber').val();
     let mailNumber = $('#emailCheckDiv').val();
+    var email1 = $('#email1').val();
+    var email2 = $('#email2').val();
+    var email = email1 + '@' + email2;
 
     $.ajax({
         type: 'get',
         url: '/Inbeomstagram/member/mailCheck',
-        data: { userNumber: userNumber },
+        data: { userNumber: userNumber,
+        		mail: email },
         success: function(isMatch) {
             if (isMatch) {
                 alert("인증번호가 일치합니다.");

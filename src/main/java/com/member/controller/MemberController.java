@@ -36,7 +36,6 @@ public class MemberController {
 	private KakaoService kakaoService;
 	@Autowired
 	private MailService mailService;
-	private int number; // 이메일 인증 숫자를 저장하는 변수
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -164,8 +163,8 @@ public class MemberController {
     public HashMap<String, Object> mailSend(String mail) {
         HashMap<String, Object> map = new HashMap<>();
         try {
-            number = mailService.sendMail(mail);
-            String num = String.valueOf(number);
+            mailService.sendMail(mail);
+            int num = mailService.getVerificationNumber(mail);
 
             map.put("success", Boolean.TRUE);
             map.put("number", num);
@@ -179,8 +178,8 @@ public class MemberController {
 	
 	// 인증번호 일치여부 확인
     @GetMapping("/mailCheck")
-    public ResponseEntity<?> mailCheck(@RequestParam String userNumber) {
-        boolean isMatch = userNumber.equals(String.valueOf(number));
+    public ResponseEntity<?> mailCheck(@RequestParam String mail, @RequestParam int userNumber) {
+        boolean isMatch = mailService.checkVerificationNumber(mail, userNumber);
         return ResponseEntity.ok(isMatch);
     }
 }

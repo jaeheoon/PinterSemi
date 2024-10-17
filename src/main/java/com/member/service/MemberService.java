@@ -3,8 +3,11 @@ package com.member.service;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
 import org.springframework.web.multipart.MultipartFile;
 
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
 

@@ -29,7 +29,8 @@ $(document).ready(function() {
     $('#deleteBtn').on('click', function() {
         const confirmation = confirm("정말 삭제하시겠습니까?");
         if (confirmation) {
-            $('#container').attr('action', '/Inbeomstagram/board/boardDelete.do');
+            $('#container').attr('action', '/Inbeomstagram/board/delete');
+
             $('#container').submit();
         } else {
             console.log("삭제가 취소되었습니다.");

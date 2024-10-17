@@ -10,7 +10,7 @@
 // seq_board를 request에서 가져옵니다.
 var seq_board = '${seq_board}';
 if(seq_board) {
-    location.href='${pageContext.request.contextPath}/board/boardView.do?seq_board=' + seq_board;
+    location.href='${pageContext.request.contextPath}/board/boardView?seq_board=' + seq_board;
 } else {
     alert("게시글 정보를 찾을 수 없습니다.");
     history.back();

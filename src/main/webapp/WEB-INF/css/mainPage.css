@@ -87,7 +87,7 @@ main {
     height: auto; /* 비율 유지 */
     border-radius: 5px; /* 이미지 모서리 둥글게 */
 }
-
+/*페이지가 1024px보다 클 때*/
 h2 {
     font-size: 4em; /* 제목 폰트 크기 */
     margin-top: 10px; /* 제목 상단 여백 */
@@ -113,7 +113,62 @@ p {
     text-align: center; /* 설명 중앙 정렬 */
     color: #006b6c;
 }
-
+/*페이지가 1024px보다 작을 때*/
+@media screen and (max-width: 1024px) {
+	h2 {
+	    font-size: 2.5em; /* 제목 폰트 크기 */
+	    margin-top: 10px; /* 제목 상단 여백 */
+	    text-align: center; /* 제목 중앙 정렬 */
+	    color: #c31952;
+	}
+	
+	.geed {
+	    font-size: 2.5em; /* 제목 폰트 크기 */
+	    margin-top: 10px; /* 제목 상단 여백 */
+	    text-align: center; /* 제목 중앙 정렬 */
+	    color: #006b6c;
+	}
+	
+	p {
+	    font-size: 1.2em; /* 설명 폰트 크기 */
+	    text-align: center; /* 설명 중앙 정렬 */
+	    color: #c31952;
+	}
+	
+	.geed1 {
+	    font-size: 1.2em; /* 설명 폰트 크기 */
+	    text-align: center; /* 설명 중앙 정렬 */
+	    color: #006b6c;
+	}
+}
+/*페이지가 600px보다 작을 때*/
+@media screen and (max-width: 600px) {
+	h2 {
+	    font-size: 1.75em; /* 제목 폰트 크기 */
+	    margin-top: 10px; /* 제목 상단 여백 */
+	    text-align: center; /* 제목 중앙 정렬 */
+	    color: #c31952;
+	}
+	
+	.geed {
+	    font-size: 1.75em; /* 제목 폰트 크기 */
+	    margin-top: 10px; /* 제목 상단 여백 */
+	    text-align: center; /* 제목 중앙 정렬 */
+	    color: #006b6c;
+	}
+	
+	p {
+	    font-size: .9em; /* 설명 폰트 크기 */
+	    text-align: center; /* 설명 중앙 정렬 */
+	    color: #c31952;
+	}
+	
+	.geed1 {
+	    font-size: .9em; /* 설명 폰트 크기 */
+	    text-align: center; /* 설명 중앙 정렬 */
+	    color: #006b6c;
+	}
+}
 /* 슬라이더 */
 .slider {
     width: 100%; /* 너비 100%로 설정 */

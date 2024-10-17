@@ -9,6 +9,7 @@
 </head>
 <body>
 	<jsp:include page="../component/header.jsp" />
+	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
 	<div class="container">
 		<div class="card">
 			<!-- 헤더 -->

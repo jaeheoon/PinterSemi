@@ -68,15 +68,15 @@ public class BoardServiceImpl implements BoardService {
 		objectStorageService.deleteFile(bucketName, "storage/", boardDTO.getImageFileName());
 		imageFileName = objectStorageService.uploadFile(bucketName, "storage/", image);
 		imageOriginalFile = image.getOriginalFilename();
-		
 		BoardDTO dto = new BoardDTO();
+		dto.setSeq_board(boardDTO.getSeq_board());
 		dto.setSeq_member(boardDTO.getSeq_member());
-		dto.setImageContent(boardDTO.getImageContent());
+		dto.setImageFileName(imageFileName);		
 		dto.setImageOriginalFileName(imageOriginalFile);
 		dto.setName(boardDTO.getName());
 		dto.setImageSubject(boardDTO.getImageSubject());
 		dto.setImageContent(boardDTO.getImageContent());
-		boardDAO.boardUpdate(boardDTO);
+		boardDAO.boardUpdate(dto);
 
 	}
 

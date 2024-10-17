@@ -26,16 +26,35 @@ $(document).ready(function() {
     }
 
     // 삭제 버튼 클릭 이벤트
+ // 삭제 버튼 클릭 이벤트
     $('#deleteBtn').on('click', function() {
         const confirmation = confirm("정말 삭제하시겠습니까?");
+        
         if (confirmation) {
-            $('#container').attr('action', '/Inbeomstagram/board/delete');
+            let seq_board = $('#seq_board').val();  // 게시글 번호 가져오기
 
-            $('#container').submit();
+            $.ajax({
+                type: 'POST',
+                url: '/Inbeomstagram/board/delete',  // 서버의 삭제 요청 URL
+                data: { seq_board: seq_board },  // 게시글 번호 전송
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);  // 성공 메시지 표시
+                        location.href = '/Inbeomstagram/';  // 삭제 후 메인 페이지로 이동
+                    } else {
+                        alert('삭제 실패: ' + response.message);  // 오류 메시지 표시
+                    }
+                },
+                error: function(error) {
+                    console.log('Error:', error);  // 오류 발생 시 콘솔 출력
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            });
         } else {
-            console.log("삭제가 취소되었습니다.");
+            console.log("삭제가 취소되었습니다.");  // 삭제 취소 시 로그 출력
         }
     });
+
 
     // 페이지 로드 시 실행되는 함수
     function onLoadpage() {
@@ -44,7 +63,7 @@ $(document).ready(function() {
         // 조회수 증가
         $.ajax({
             type: 'POST',
-            url: '/Inbeomstagram/comment/commentHit.do',
+            url: '/Inbeomstagram/comment/hitUpdate',
             data: { 'seq_board': seqBoard },
             dataType: 'json',
             success: function(response) {
@@ -58,7 +77,7 @@ $(document).ready(function() {
         // 댓글 로드
         $.ajax({
             type: 'POST',
-            url: '/Inbeomstagram/comment/commentView.do',
+            url: '/Inbeomstagram/comment/commentList',
             data: { 'seq_board': seqBoard },
             dataType: 'json',
             success: function(data) {

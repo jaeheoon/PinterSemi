@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
-import com.member.kakao.service.KaKaoService;
 import com.member.service.MemberService;
+import com.member.service.kakao.KakaoService;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -26,7 +26,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private KaKaoService kaKaoService;
+	private KakaoService kakaoService;
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -96,9 +96,9 @@ public class MemberController {
 	@RequestMapping(value = "/kakao/login")
 	public String getCI(@RequestParam String code, Model model) throws IOException {
 		System.out.println("code = " + code);
-		String access_token = kaKaoService.getToken(code); 
+		String access_token = kakaoService.getToken(code); 
 		System.out.println("access_token : " + access_token);
-        Map<String, Object> userInfo = kaKaoService.getUserInfo(access_token);
+        Map<String, Object> userInfo = kakaoService.getUserInfo(access_token);
         System.out.println("id : " + userInfo.get("id"));
         System.out.println("nickname : " + userInfo.get("nickname"));
         System.out.println("email : " + userInfo.get("email"));

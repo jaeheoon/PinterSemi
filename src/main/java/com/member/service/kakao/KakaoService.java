@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import spring.conf.KakaoConfiguration;
 
 @Service
 public class KakaoService {
+	@Autowired
 	KakaoConfiguration kakaoConfiguration;
 	
 	public String getToken(String code) throws IOException {

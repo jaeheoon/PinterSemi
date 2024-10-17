@@ -96,7 +96,7 @@ public class MemberController {
 	@RequestMapping(value = "/kakao/login")
 	public String getCI(@RequestParam String code, Model model) throws IOException {
 		System.out.println("code = " + code);
-		String access_token = kakaoService.getToken(code); 
+		String access_token = kakaoService.getToken(code);
 		System.out.println("access_token : " + access_token);
         Map<String, Object> userInfo = kakaoService.getUserInfo(access_token);
         System.out.println("id : " + userInfo.get("id"));

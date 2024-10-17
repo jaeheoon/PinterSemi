@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,15 @@
 					<a>사진</a>
 				</div>
 				<div class="userprofiledomain">
-					<div class="userprofile">
-						
+					<div class="userprofile" id="userprofile">
+						<c:if test="${not empty memDTO.userProfile }">
+							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile }" alt="${memDTO.userOriginalProfile }" />
+						</c:if>
 					</div>
 					<div class="profilebutton">
-						<input type="submit" value="변경"/>
+						<input type="button" id="change" value="변경" />
+						<input type="file" name="img" id="profileUpdateBtn" style="display:none;"/>
+						<input type="file" name="userProfileImg" id="userProfileImg" style="display:none;"/>
 					</div>
 				</div>
 				
@@ -104,7 +109,7 @@
 				</div>
 				<div class="updatephone">
 				    <div class="input-container">
-				        <select name="updatetel1">
+				        <select name="tetel1" id="updatetel1">
 				            <optgroup label="hp">
 				                <option value="010">010</option>
 				                <option value="011">011</option>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
@@ -109,5 +110,26 @@ public class MemberController {
         model.addAttribute("userInfo", userInfo);
         
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public void update(@ModelAttribute MemberDTO memberDTO,
+						@RequestParam("userProfileImg") MultipartFile userProfileImg,
+						@RequestParam("addr1") String addr1,
+						@RequestParam("addr2") String addr2,
+						@RequestParam("email1") String email1,
+			            @RequestParam("email2") String email2,
+			            @RequestParam("tetel1") String tel1,
+			            @RequestParam("tetel2") String tel2,
+			            @RequestParam("tetel3") String tel3,
+			            HttpSession session) {
+		
+		memberDTO.setAddress(addr1 +","+ addr2);
+		memberDTO.setEmail(email1 + "@" + email2);
+		memberDTO.setPhoneNumber(tel1 + "-" + tel2 + "-" + tel3);
+		
+		memberService.update(memberDTO, userProfileImg);
+		session.setAttribute("memDTO", memberDTO);
 	}
 }

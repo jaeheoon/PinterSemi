@@ -26,11 +26,11 @@
 	</div>
 	<div id="main-content">
 		<form id="container" method="POST"
-			action="${pageContext.request.contextPath}/board/boardUpdateForm">
+			action="${pageContext.request.contextPath}/board/updateForm">
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
-				id="image" name="image" value="${boardDTO.imageFileName}"> <input
+				id="image" name="imageFileName" value="${boardDTO.imageFileName}"> <input
 				type="hidden" id="imageSubject" name="imageSubject"
 				value="${boardDTO.imageSubject}"> <input type="hidden"
 				id="imageContent" name="imageContent"

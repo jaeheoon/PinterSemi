@@ -50,7 +50,7 @@ $('.boardWriteBtn').click(function() {
          data: formData,
          success: function() {
             alert('이미지 등록 완료');
-            location.href = '/Inbeomstagram/index';
+            location.href = '/Inbeomstagram/';
          },
          error: function(e) {
             console.log(e);

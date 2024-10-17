@@ -26,11 +26,11 @@
 	</div>
 	<div id="main-content">
 		<form id="container" method="POST"
-			action="${pageContext.request.contextPath}/board/boardUpdateForm">
+			action="${pageContext.request.contextPath}/board/updateForm">
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
-				id="image" name="image" value="${boardDTO.imageFileName}"> <input
+				id="image" name="imageFileName" value="${boardDTO.imageFileName}"> <input
 				type="hidden" id="imageSubject" name="imageSubject"
 				value="${boardDTO.imageSubject}"> <input type="hidden"
 				id="imageContent" name="imageContent"
@@ -52,8 +52,7 @@
 					<!-- 나중에 수정해야 함 -->
 					<span id="hitRate"> <svg xmlns="http://www.w3.org/2000/svg"
 							id="hitIcon" viewBox="0 0 448 512">
-						<path
-								d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" /></svg>
+						<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" /></svg>
 					</span>
 					<p style="margin: 0;">${boardDTO.hit}</p>
 					<span id="share"> <input type="file" id="input-file"

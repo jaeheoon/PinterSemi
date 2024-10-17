@@ -30,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	private ObjectStorageService objectStorageService;
 	
 	private String bucketName = "bitcamp-9th-pinter";
+	
 	@Override
 	public boolean checkId(String id) {
 		MemberDTO memberDTO = memberDAO.isExistId(id);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.board.bean.BoardDTO;
 
@@ -16,10 +15,8 @@ public interface BoardDAO {
 
 	public List<BoardDTO> getBoardList();
 
-	public List<BoardDTO> getBoardPagingList(@Param("startRow")int startRow, @Param("endRow") int endRow);
-
-	public List<BoardDTO> getBoardPopularPagingList(@Param("startRow") int startRow, @Param("endRow") int endRow);
-
+	public List<BoardDTO> getBoardPagingList(Map<String, Object> map);
+	
 	public BoardDTO getBoard(long seq_board);
 
 	public void boardUpdate(BoardDTO boardDTO);

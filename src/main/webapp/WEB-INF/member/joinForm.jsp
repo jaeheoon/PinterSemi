@@ -58,6 +58,8 @@
 						 	 <option value="gmail.com">
 						 </datalist>
 						<div id="emailDiv"></div>
+						<input type="button" value="인증하기" class="btn btn-primary" id="emailCheck">
+						<input type="hidden" value="" id="emailCheckDiv">
 					</div>
 					<div class="form-group">
 						<label for="phoneNumber">휴대전화</label> <select name="tel1">
@@ -93,6 +95,5 @@
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/member/join.js"></script>

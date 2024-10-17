@@ -20,8 +20,7 @@
 			<section class="gallery">
 				<c:forEach var="boardDTO" items="${list}">
 					<div class="grid-item">
-						<a
-							href="${pageContext.request.contextPath}/board/boardView.do?seq_board=${boardDTO.seq_board}">
+						<a href="${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}">
 							<img
 							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
 							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>

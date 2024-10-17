@@ -1,5 +1,6 @@
 package com.member.controller;
 
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.board.bean.BoardDTO;
 import com.member.bean.MemberDTO;
 import com.member.service.MemberService;
@@ -26,6 +26,7 @@ import com.member.service.kakao.KakaoService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+
 	@Autowired
 	private KakaoService kakaoService;
 	
@@ -93,6 +94,7 @@ public class MemberController {
 	public String updateForm() {
 		return "/member/updateForm";
 	}
+
 	
 	@RequestMapping(value = "/kakao/login")
 	public String getCI(@RequestParam String code, Model model) throws IOException {

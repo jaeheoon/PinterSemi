@@ -8,7 +8,8 @@ import lombok.Data;
 public class BoardDTO {
 	private long seq_board;
 	private long seq_member;
-	private String image;
+	private String imageFileName; // UUID
+	private String imageOriginalFileName;
 	private String name;
 	private String imageSubject;
 	private String imageContent;

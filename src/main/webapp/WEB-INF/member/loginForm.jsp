@@ -28,6 +28,11 @@
 			            <div id="loginResult"></div>
 			            <button type="submit" class="btn btn-primary" id="loginBtn">로그인</button>
 			        </div>
+			        <div>
+				        <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id={REST_API_KEY}&redirect_uri=http://localhost/Inbeomstagram/member/kakao/login&response_type=code">
+						  <img src="/Inbeomstagram/img/kakao_login_large_wide.png" style="height:60px"/>
+						</a>
+			        </div>
 			    </form>
 			</div>
 		</div>

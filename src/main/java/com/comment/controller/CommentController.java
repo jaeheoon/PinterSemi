@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.comment.bean.CommentDTO;
 import com.comment.service.CommentService;
@@ -23,13 +25,15 @@ public class CommentController {
 	public void commentWrite(@ModelAttribute CommentDTO commentDTO) {
 		commentService.commentWrite(commentDTO);
 	}
-	@RequestMapping("/commentList")
+	@RequestMapping(value="/commentList", method=RequestMethod.POST)
+	@ResponseBody
 	public Model commentList(@RequestParam("seq_board")long seq_board, Model model){
 		List<CommentDTO>list = commentService.commentList(seq_board);
 		model.addAttribute("list", list);
 		return model;
 	}
-	@RequestMapping("/hitUpdate")
+	@RequestMapping(value="/hitUpdate", method=RequestMethod.POST)
+	@ResponseBody
 	public void hitUpdate(@RequestParam("seq_board")long seq_board) {
 		commentService.hitUpdate(seq_board);
 	}

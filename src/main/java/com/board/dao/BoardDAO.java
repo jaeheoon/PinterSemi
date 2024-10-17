@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+<<<<<<< HEAD
+import org.apache.ibatis.annotations.Param;
+=======
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

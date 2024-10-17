@@ -21,7 +21,7 @@
 		<c:if test="${not empty sessionScope.memDTO}">
 			<nav class="navigation">
 				<ul>
-					<li><a href="/Inbeomstagram/board/boardWriteForm">핀 생성</a></li>
+					<li><a href="/Inbeomstagram/board/writeForm">핀 생성</a></li>
 				</ul>
 			</nav>
                 <div class="search-box">

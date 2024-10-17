@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<<<<<<< HEAD
+=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +112,11 @@
 				</div>
 				<div class="updatephone">
 				    <div class="input-container">
+<<<<<<< HEAD
+				        <select name="updatetel1">
+=======
 				        <select name="tetel1" id="updatetel1">
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 				            <optgroup label="hp">
 				                <option value="010">010</option>
 				                <option value="011">011</option>

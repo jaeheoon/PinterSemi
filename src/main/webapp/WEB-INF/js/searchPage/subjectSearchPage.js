@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 	function loadMoreData(page, keyword) {
 		$.ajax({
-			url: 'subjectSearchPage.do',
+			url: 'searchingPage',
 			type: 'GET',
 			data: { page: page, keyword: keyword },  // 페이지 번호와 키워드 전달
 			dataType: 'json',
@@ -42,7 +42,11 @@ $(document).ready(function() {
 
 			const newItem = `
 		            <div class="grid-item">
+<<<<<<< HEAD
+		                <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">
+=======
 		                <a href="${contextPath}/board/boardView.do?seq_board=${seqBoard}">
+>>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 		                    <img src="${contextPath}/storage/${image}" alt="${imageSubject}" />
 		                    <span class="hit">${hit}</span>
 		                </a>

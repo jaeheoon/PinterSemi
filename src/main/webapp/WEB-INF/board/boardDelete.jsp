@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	location.href='${pageContext.request.contextPath}/member/mypageForm.do';
+	location.href='${pageContext.request.contextPath}/member/mypageForm';
 </script>
 </body>
 </html>

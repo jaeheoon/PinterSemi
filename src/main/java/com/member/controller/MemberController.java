@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.board.bean.BoardDTO;
 import com.mail.service.MailService;
 import com.member.bean.MemberDTO;
@@ -102,7 +104,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/kakao/login")
-	public String getCI(@RequestParam String code, Model model) throws IOException {
+	public String getCI(@RequestParam String code, 
+			HttpSession session,
+			Model model, 
+			RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("code = " + code);
 		String access_token = kakaoService.getToken(code);
 		System.out.println("access_token : " + access_token);
@@ -112,11 +117,24 @@ public class MemberController {
         System.out.println("email : " + userInfo.get("email"));
         System.out.println("profile_image : " + userInfo.get("profile_image"));
         
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
+        //아이디 검색
+        boolean check = memberService.checkId(userInfo.get("email")+"");
+        System.out.println(check);
+        if (!check) {
+        	redirectAttributes.addFlashAttribute("code", code);
+        	redirectAttributes.addFlashAttribute("check", check);
+        	redirectAttributes.addFlashAttribute("access_token", access_token);
+        	redirectAttributes.addFlashAttribute("userInfo", userInfo);
+        	return "redirect:/";
+		} else {
+			MemberDTO memberDTO = memberService.getMember(userInfo.get("email")+"");
+			
+			session.setAttribute("memDTO", memberDTO);
+			model.addAttribute("userInfo", userInfo);
+			model.addAttribute("access_token", access_token);
+			return "/index";
+		}
         
-		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/update")

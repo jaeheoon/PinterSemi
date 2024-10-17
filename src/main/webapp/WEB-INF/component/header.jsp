@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/Inbeomstagram/css/header.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Inbeomstagram/css/header.css">
 <header>
 	<div class="logo">
 		<a href="${pageContext.request.contextPath}/"> <!-- 홈으로 이동할 수 있는 로고 -->
@@ -32,6 +30,12 @@
                 </div>
 		</c:if>
 	</div>
+	
+	<!-- kakao 정보 -->
+   	<input type="hidden" id="check" value="${ check }">
+   	<input type="hidden" id="userInfoId" value="${ userInfo.id }">
+   	<input type="hidden" id="userInfoNick" value="${ userInfo.nickname }">
+   	<input type="hidden" id="userInfoEmail" value="${ userInfo.email }">
 
 	<div class="auth-buttons">
 		<c:if test="${empty sessionScope.memDTO}">
@@ -51,9 +55,9 @@
 <jsp:include page="../member/loginForm.jsp" />
 <jsp:include page="../member/joinForm.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/logout.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/member/join.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header/header.js"></script>

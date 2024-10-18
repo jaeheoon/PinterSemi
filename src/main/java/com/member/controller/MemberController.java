@@ -36,6 +36,7 @@ public class MemberController {
 	private KakaoService kakaoService;
 	@Autowired
 	private MailService mailService;
+	private int number; // 이메일 인증 숫자를 저장하는 변수
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -55,6 +56,8 @@ public class MemberController {
 		             @RequestParam("tel3") String tel3,
 		             @RequestParam("addr1") String addr1,
 		             @RequestParam("addr2") String addr2) {
+		System.out.println(memberDTO.getKakaoCheck());
+		System.out.println(memberDTO.getKakaoProfile());
 		String email = email1 + "@" + email2;
 		String phoneNumber = tel1 + "-" + tel2 + "-" + tel3;
 		String address = addr1 + "," + addr2;
@@ -118,10 +121,11 @@ public class MemberController {
         
         //아이디 검색
         boolean check = memberService.checkId(userInfo.get("email")+"");
-        System.out.println(check);
+        System.out.println("체크 " + check);
         if (!check) {
         	redirectAttributes.addFlashAttribute("code", code);
         	redirectAttributes.addFlashAttribute("check", check);
+        	redirectAttributes.addFlashAttribute("kakaoCheck", "T");
         	redirectAttributes.addFlashAttribute("access_token", access_token);
         	redirectAttributes.addFlashAttribute("userInfo", userInfo);
         	return "redirect:/";
@@ -153,34 +157,42 @@ public class MemberController {
 		memberDTO.setEmail(email1 + "@" + email2);
 		memberDTO.setPhoneNumber(tel1 + "-" + tel2 + "-" + tel3);
 		
+		if (userProfileImg != null) memberDTO.setKakaoCheck("F");	//카카오 사용자가 변경할 사진을 넣었을땐 F
+		
 		memberService.update(memberDTO, userProfileImg);
 		session.removeAttribute("memDTO");
 		session.setAttribute("memDTO", memberDTO);
 	}
 	
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public void delete(HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memDTO");
+		memberService.delete(memberDTO);
+		session.removeAttribute("memDTO");
+	}
+	
 	// 인증 이메일 전송
 	@PostMapping("/mailSend")
 	@ResponseBody
-    public HashMap<String, Object> mailSend(String mail) {
+	public HashMap<String, Object> mailSend(String mail) {
         HashMap<String, Object> map = new HashMap<>();
         try {
-            mailService.sendMail(mail);
-            int num = mailService.getVerificationNumber(mail);
-
+            number = mailService.sendMail(mail);
+            String num = String.valueOf(number);
             map.put("success", Boolean.TRUE);
             map.put("number", num);
         } catch (Exception e) {
             map.put("success", Boolean.FALSE);
             map.put("error", e.getMessage());
         }
-
         return map;
     }
 	
 	// 인증번호 일치여부 확인
-    @GetMapping("/mailCheck")
-    public ResponseEntity<?> mailCheck(@RequestParam String mail, @RequestParam int userNumber) {
-        boolean isMatch = mailService.checkVerificationNumber(mail, userNumber);
+	@GetMapping("/mailCheck")
+    public ResponseEntity<?> mailCheck(@RequestParam String userNumber) {
+        boolean isMatch = userNumber.equals(String.valueOf(number));
         return ResponseEntity.ok(isMatch);
     }
     

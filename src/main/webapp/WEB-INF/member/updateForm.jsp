@@ -12,6 +12,7 @@
 <body>
 <jsp:include page="../component/header.jsp" />
 <form name="updateForm" id="updateForm">
+	<input type="hidden" name="seq_member" value="${sessionScope.memDTO.seq_member }" />
 	<div class="updatepage">
 		<div class="updatepagebody">
 			<div class="upadtecontainer">

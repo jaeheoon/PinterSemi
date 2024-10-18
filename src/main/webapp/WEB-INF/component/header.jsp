@@ -36,6 +36,7 @@
    	<input type="hidden" id="userInfoId" value="${ userInfo.id }">
    	<input type="hidden" id="userInfoNick" value="${ userInfo.nickname }">
    	<input type="hidden" id="userInfoEmail" value="${ userInfo.email }">
+   	<input type="hidden" id="userInfoImg" value="${ userInfo.profile_image }">
 
 	<div class="auth-buttons">
 		<c:if test="${empty sessionScope.memDTO}">

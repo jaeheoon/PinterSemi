@@ -27,6 +27,7 @@
 	<div id="main-content">
 		<form id="container" method="POST"
 			action="${pageContext.request.contextPath}/board/updateForm">
+			<input type="hidden" id="seq_member" name="seq_member" value="${sessionScope.memDTO.seq_member }">
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
@@ -66,7 +67,7 @@
 					<div id="pin-buttons">
 						<c:if test="${not empty memDTO.seq_member }">
 							<c:if test="${memDTO.seq_member != boardDTO.seq_member }">
-								<input type="button" id="scarpBtn" value="저장" />
+								<input type="button" id="scrapBtn" value="저장" />
 							</c:if>
 						</c:if>
 						<c:if test="${memDTO.seq_member == boardDTO.seq_member}">
@@ -144,6 +145,8 @@
 	</div>
 	<div id="searchMore">
 			<h4 style="text-align: center; margin-top:30px; color:black">더 찾아보기</h4>
+			<input type="text" value="${ memDTO.seq_member }">
+			<input type="text" value="${ boardDTO.seq_board }">
 			<section class="gallery" style="padding:2em 0;">
 				<c:forEach var="boardDTO" items="${list}">
 					<div class="grid-item">
@@ -168,6 +171,7 @@
 		console.log(Kakao.isInitialized());		
 	</script>	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/boardScrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/boardView.js"></script>
 	<script>
 		function closePage() {
@@ -180,6 +184,5 @@
 	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/searchPage/boardSearchPage.js"></script>
-	<script src="${pageContext.request.contextPath}/js/board/boardScrap.js"></script>
 </body>
 </html>

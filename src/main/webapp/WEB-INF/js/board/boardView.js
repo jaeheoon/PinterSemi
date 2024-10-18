@@ -2,8 +2,9 @@ $(document).ready(function() {
 	
     const picker = new EmojiButton({
         position: 'bottom-start'
-    });
-
+    });  
+    
+    
     // 이모지 버튼 클릭 시 토글
     $('#emoji_btn').on('click', function() {
         picker.togglePicker(this);
@@ -25,6 +26,31 @@ $(document).ready(function() {
     function updateCommentCount(count) {
         $('#comment-num').text('댓글 ' + count + '개');
     }
+    
+    $('#likeIcon').on('click', function() {
+        const seqBoard = $('#data').data('seq-board');
+        const seqMember = $('#seq_member').val(); // seq_member 가져오기
+        const isActive = $(this).hasClass('active');
+        
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: isActive ? '/Inbeomstagram/board/unlike' : '/Inbeomstagram/board/like',
+            data: { seq_board: seqBoard, seq_member: seqMember }, 
+            success: function(data) {
+                if (data.status === 'success') {
+                    $('#likeIcon').toggleClass('active'); // 좋아요 상태 토글
+                    $('#likeCount').text(data.likeCount); // 좋아요 수 업데이트
+                } else {
+                    alert(data.message); // 실패 메시지 표시
+                }
+            },
+            error: function() {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+        });
+    });
 
     // 삭제 버튼 클릭 이벤트
  // 삭제 버튼 클릭 이벤트
@@ -61,44 +87,6 @@ $(document).ready(function() {
         window.history.back(); // 이전 페이지로 돌아가기
     }
 	
-	// 카카오톡 공유 버튼 클릭 이벤트
-	function uploadImage(imageUrl) {
-	    // 카카오톡 API URL
-	    var apiUrl = "https://kapi.kakao.com/v2/api/talk/message/image/upload";
-
-	    // 카카오톡 액세스 토큰
-	    var accessToken = "YOUR_ACCESS_TOKEN";
-
-	    // 이미지 URL을 Blob으로 변환하는 함수
-	    fetch(imageUrl)
-	        .then(response => response.blob())
-	        .then(blob => {
-	            var formData = new FormData();
-	            formData.append('file', blob, 'image.jpg'); // 이미지 파일명은 'image.jpg'로 설정
-
-	            // AJAX 요청으로 카카오톡 API에 업로드
-	            $.ajax({
-	                url: apiUrl,
-	                type: 'POST',
-	                headers: {
-	                    Authorization: 'Bearer ' + accessToken
-	                },
-	                data: formData,
-	                processData: false, // FormData를 처리하지 않음
-	                contentType: false, // 기본 설정
-	                success: function(response) {
-	                    console.log('Image uploaded successfully:', response);
-	                },
-	                error: function(jqXHR, textStatus, errorThrown) {
-	                    console.error('Error uploading image:', textStatus, errorThrown);
-	                }
-	            });
-	        })
-	        .catch(error => {
-	            console.error('Error converting image to Blob:', error);
-	        });
-	}
-
 	// 버튼 클릭 시 이미지 업로드
 	$('#shareBtn').on("click", function() {
 	    var imageUrl = $('#data').data('image'); // 이미지 URL을 가져옴
@@ -284,6 +272,7 @@ $(document).ready(function() {
 });
 function onLoadpage() {
     const seqBoard = $('#data').data('seq-board');
+    const seqMember = $('#seq_member').val(); 
 
     // 조회수 증가
     $.ajax({
@@ -322,6 +311,24 @@ function onLoadpage() {
         },
         error: function() {
             alert('댓글을 불러오는 데 실패했습니다.');
+        }
+    });
+    
+    $.ajax({
+        type: 'POST',
+        url: '/Inbeomstagram/board/loadLikes',
+        data: { seq_board: seqBoard, seq_member: seqMember },
+        success: function(data) {
+        	console.log('loadLikes'+data);
+            if (data.status === "success") {
+                $('#likeIcon').toggleClass('active', data.liked); // 좋아요 상태에 따라 토글
+                $('#likeCount').text(data.likeCount); // 좋아요 수 업데이트
+            } else {
+                alert(data.message);
+            }
+        },
+        error: function() {
+            alert('좋아요 정보를 불러오는 데 실패했습니다.');
         }
     });
 }

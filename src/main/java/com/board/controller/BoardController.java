@@ -22,11 +22,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.bean.BoardDTO;
 import com.board.service.BoardService;
 
+import spring.conf.KakaoConfiguration;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private KakaoConfiguration kakaoConfiguration;
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	@ResponseBody
@@ -96,6 +100,7 @@ public class BoardController {
 		BoardDTO boardDTO = boardService.getBoard(seq_board);
 		ModelAndView mav = new ModelAndView("/board/boardView");
 		mav.addObject("boardDTO", boardDTO);
+		mav.addObject("javaScriptKey",kakaoConfiguration.getJavaScriptKey());
 		return mav;
 	}
 

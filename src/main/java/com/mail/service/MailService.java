@@ -1,13 +1,9 @@
 package com.mail.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,14 +13,14 @@ import lombok.RequiredArgsConstructor;
 public class MailService {
     private final JavaMailSender javaMailSender;
     private static final String senderEmail= "bit.pinterest.user@gmail.com";
-    // 각 사용자의 인증 번호를 저장하는 맵
-    private final Map<String, Integer> emailVerificationMap = new HashMap<>();
-
-    @Async
-    public void sendMail(String mail) {
-        int number = createNumber();
+    private static int number;
+	// 랜덤으로 숫자 생성
+    public static void createNumber() {
+        number = (int)(Math.random() * (90000)) + 100000; //(int) Math.random() * (최댓값-최소값+1) + 최소값
+    }
+    public MimeMessage CreateMail(String mail) {
+        createNumber();
         MimeMessage message = javaMailSender.createMimeMessage();
-
         try {
             message.setFrom(senderEmail);
             message.setRecipients(MimeMessage.RecipientType.TO, mail);
@@ -34,28 +30,14 @@ public class MailService {
             body += "<h1>" + number + "</h1>";
             body += "<h3>" + "감사합니다." + "</h3>";
             message.setText(body,"UTF-8", "html");
-
-            javaMailSender.send(message);
-
-            //사용자 이메일과 인증 번호 매핑 저장
-            emailVerificationMap.put(mail, number);
-            
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
+        return message;
     }
-
-    public int getVerificationNumber(String mail) {
-        return emailVerificationMap.getOrDefault(mail, -1); // 해당 이메일의 인증 번호 반환, 없으면 -1 반환
-    }
-
-    private int createNumber() {
-        return (int)(Math.random() * (90000)) + 100000; //(int) Math.random() * (최댓값-최소값+1) + 최소값
-    }
-
-    public boolean checkVerificationNumber(String mail, int userNumber) {
-        int storedNumber = getVerificationNumber(mail);
-        return storedNumber == userNumber;
+    public int sendMail(String mail) {
+        MimeMessage message = CreateMail(mail);
+        javaMailSender.send(message);
+        return number;
     }
 }

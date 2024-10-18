@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +27,16 @@
 					<a>사진</a>
 				</div>
 				<div class="userprofiledomain">
-					<div class="userprofile" id="userprofile">
-						<c:if test="${not empty memDTO.userProfile }">
-							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile }" alt="${memDTO.userOriginalProfile }" />
+					<div class="userprofile" id="userprofile">	
+						<c:if test="${ memDTO.kakaoCheck == 'F' }">
+							<c:if test="${ not empty memDTO.userProfile }">
+								<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${ memDTO.userProfile }" alt="${memDTO.userOriginalProfile }" />
+							</c:if>
+						</c:if>
+						<c:if test="${ memDTO.kakaoCheck == 'T' }">
+							<c:if test="${ not empty memDTO.kakaoProfile }">
+								<img src="${ memDTO.kakaoProfile }" alt="카카오 사진" />
+							</c:if>
 						</c:if>
 					</div>
 					<div class="profilebutton">
@@ -112,11 +116,7 @@
 				</div>
 				<div class="updatephone">
 				    <div class="input-container">
-<<<<<<< HEAD
-				        <select name="updatetel1">
-=======
 				        <select name="tetel1" id="updatetel1">
->>>>>>> d5e248897a913a9ec5d8517b9cc2a626720df8f6
 				            <optgroup label="hp">
 				                <option value="010">010</option>
 				                <option value="011">011</option>

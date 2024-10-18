@@ -59,6 +59,14 @@
 		<!-- 작성한 이미지 출력 -->
 		<div id="boardbody">
         	<div id="board-list">
+        		<%-- <c:forEach var="dto" items="${list }">
+        			<div class="grid-item">
+						<a href="/Inbeomstagram/board/boardView?seq_board=${dto.seq_board}">
+							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${dto.imageFileName}"
+								alt="${dto.imageSubject}" />
+						</a>
+					</div>
+        		</c:forEach> --%>
         	</div>
         </div>
 	</div>
@@ -68,17 +76,17 @@
 $(document).ready(function() {
     let seq_member = '${memDTO.seq_member}';
     $.ajax({
-        type: "POST",
-        url: "/Inbeomstagram/member/mypageSup",
-        data: { 'seq_member': seq_member },
-        dataType: 'json',
+    	type : 'post',
+		url : '/Inbeomstagram/boardScrap/getBoardScrap',
+		data : { 'seq_member' : seq_member },
+		dataType: 'json',
         success: function(data) {
             let boardList = $("#board-list");
             boardList.empty();
 
             if (data.mypagelist && data.mypagelist.length > 0) {
                 data.mypagelist.forEach(function(item) {
-                    let imageUrl = "/Inbeomstagram/storage/" + item.image;
+                    let imageUrl = "https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/" + item.image;
                     let postUrl = "/Inbeomstagram/board/boardView?seq_board=" + item.seq_board;
                     
                     let imgElement = $("<img>").attr("src", imageUrl).addClass("mypage-image");

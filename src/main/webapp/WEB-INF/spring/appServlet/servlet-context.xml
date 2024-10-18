@@ -23,6 +23,7 @@
 	<context:component-scan base-package="com.ncp.PinterSemi
 										  com.member.controller
 										  com.board.controller
+										  com.boardscrap.controller
 										  com.comment.controller
 										  "/>
 	

@@ -21,6 +21,8 @@ public class MemberDTO {
 	private Date logtime;
 	private String userProfile; // 사용자 프로필사진 값
 	private String userOriginalProfile; // 사용자 프로필사진 이름
+	private String kakaoProfile; 		// 사용자 카카오 프로필사진
+	private String kakaoCheck; 			// 카카오 여부
 	
 	@Override
 	public String toString() {

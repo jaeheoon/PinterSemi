@@ -8,6 +8,7 @@ $('#searchKeyword').on('keydown', function(event) {
     }
 });
 
+//카톡 아이디 여부로 join form 열기
 $(document).ready(function() {
     const check = $('#check').val(); // 서버에서 아이디 존재 여부를 JSP에서 변수로 가져옴
     const userId = $('#userInfoId').val(); // 서버에서 id를 JSP에서 변수로 가져옴

@@ -1,7 +1,5 @@
 package com.member.service.impl;
 
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +15,6 @@ import com.board.bean.BoardDTO;
 import com.board.dao.BoardDAO;
 import com.member.bean.MemberDTO;
 import com.member.dao.MemberDAO;
-
 import com.member.ncp.service.ObjectStorageService;
 import com.member.service.MemberService;
 
@@ -33,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	private ObjectStorageService objectStorageService;
 	
 	private String bucketName = "bitcamp-9th-pinter";
+	
 	@Override
 	public boolean checkId(String id) {
 		MemberDTO memberDTO = memberDAO.isExistId(id);
@@ -57,7 +55,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-
 	public void update(MemberDTO memberDTO, MultipartFile userProfileImg) {
 		String filePath = session.getServletContext().getRealPath("WEB-INF/storage");
 		System.out.println("실제폴더 = " + filePath);

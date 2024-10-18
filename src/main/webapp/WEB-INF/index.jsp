@@ -16,5 +16,6 @@
             <c:redirect url="/board/searchPage" />
         </c:otherwise>
     </c:choose>
+    
 </body>
 </html>

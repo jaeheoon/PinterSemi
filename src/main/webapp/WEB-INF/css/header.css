@@ -158,6 +158,15 @@ input[name="email1"], input[name="email2"], input[name="email3"] {
 	margin-right: 10px; /* Space between fields */
 }
 
+input#userNumber {
+	width: calc(33.3% - 15px); /* Set width for three fields in a row */
+	padding: 8px; /* Add some padding */
+	border: 1px solid #ccc; /* Light border */
+	border-radius: 4px; /* Rounded corners */
+	margin-right: 10px; /* Space between fields */
+	margin-top: 3%;
+}
+
 input[name="email3"] {
 	margin-right: 0; /* Remove margin for the last field */
 }
@@ -190,4 +199,8 @@ select[name="tel1"], input[name="tel2"], input[name="tel3"] {
 
 #zipButton:hover {
     background-color: #c5001e; /* Darken background on hover */
+}
+
+#emailCheck {
+	margin-top: 3%;
 }

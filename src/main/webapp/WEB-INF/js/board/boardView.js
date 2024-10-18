@@ -46,6 +46,7 @@ $(document).ready(function() {
                 } 
             }.bind(this)
             ,
+
             error: function() {
                 alert('좋아요 처리 중 오류가 발생했습니다.');
             }
@@ -325,13 +326,14 @@ function onLoadpage() {
             		$('#likeIcon').toggleClass('active'); // 좋아요 상태에 따라 토글
             	}else {
             		$('#likeIcon').remove('active'); // 좋아요 상태에 따라 토글
-            	}
-                
+            	}                
+
                 $('#likeCount').text(data.likeCount); // 좋아요 수 업데이트
             } else {
                 alert(data.message);
             }
         }.bind(this),
+
         error: function() {
             alert('좋아요 정보를 불러오는 데 실패했습니다.');
         }

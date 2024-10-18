@@ -30,12 +30,12 @@ public class LikesController {
         long boardId = parseLong(seqBoard);
         long memberId = parseLong(seqMember);
         
-        boolean isLiked = likesService.isLikedByMember(boardId, memberId);
-        
+        boolean isLiked = likesService.isLikedByMember(boardId, memberId);        
         try {
             if (isLiked) {
                 // 이미 좋아요를 눌렀다면 제거
                 likesService.removeLike(boardId, memberId);
+
                 result.put("status", "success");
                 result.put("message", "좋아요가 취소되었습니다.");
                 result.put("liked", false);
@@ -48,8 +48,10 @@ public class LikesController {
             }
 
             // 해당 게시물의 좋아요 수 업데이트
+
             int likeCount = likesService.countLikesByBoard(boardId);
             result.put("likeCount", likeCount);
+
         } catch (Exception e) {
             result.put("status", "error");
             result.put("message", "좋아요 처리 중 오류가 발생했습니다.");
@@ -57,8 +59,8 @@ public class LikesController {
         }
 
         return result;
+
     }  
-    
 
     // 페이지 로드 시 좋아요 수와 좋아요 여부를 불러오는 메서드
     @RequestMapping(value = "/loadLikes", method = RequestMethod.POST)
@@ -72,6 +74,7 @@ public class LikesController {
         try {
             boolean isLiked = likesService.isLikedByMember(boardId, memberId);
             int likeCount = likesService.countLikesByBoard(boardId); // seq_board로 수정
+
 
             result.put("status", "success");
             result.put("liked", isLiked);
@@ -93,6 +96,7 @@ public class LikesController {
         
         try {
             int likeCount = likesService.countLikesByBoard(parseLong(seqBoard));
+
             result.put("status", "success");
             result.put("likeCount", likeCount);
         } catch (Exception e) {
@@ -103,4 +107,5 @@ public class LikesController {
 
         return result;
     }
+
 }

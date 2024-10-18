@@ -20,9 +20,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public List<CommentDTO> commentList(long seq_board) {
-		commentDAO.commentList(seq_board);
-		return null;
+	public List<CommentDTO> commentList(String seq_board) {
+		return commentDAO.commentList(Long.parseLong(seq_board));
 	}
 
 	@Override

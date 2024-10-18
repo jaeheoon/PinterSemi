@@ -7,7 +7,7 @@ import com.comment.bean.CommentDTO;
 
 public interface CommentService {
 	public void commentWrite(CommentDTO commentDTO);
-	public List<CommentDTO> commentList(long seq_board);
+	public List<CommentDTO> commentList(String seq_board);
 	public void hitUpdate(long seq_board);
 	public void commentDelete(long seq_comment);
 	public void commentUpdate(Map<String, Object> map);	

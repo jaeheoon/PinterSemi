@@ -101,11 +101,18 @@ public class BoardController {
 
 	// 얘는 그냥 탐색 페이지
 	@RequestMapping("/searchPage")
-	public ModelAndView getBoardPagingList(@RequestParam(value = "page", required = false) String page) {
-		List<BoardDTO> list = boardService.getBoardPagingList(page);
+	public ModelAndView getBoardPagingList() {
+		List<BoardDTO> list = boardService.getBoardPagingList("0");
 		ModelAndView mav = new ModelAndView("/searchPage/searchPage");
 		mav.addObject("list", list);
 		return mav;
+	}
+	
+	@RequestMapping("/searchPage/loadpage")
+	@ResponseBody  // 이 어노테이션을 추가하여 JSON 형식으로 응답
+	public List<BoardDTO> getBoardPagingList(@RequestParam(value = "page", required = false) String page) {
+	    List<BoardDTO> list = boardService.getBoardPagingList(page);
+	    return list; 
 	}
 
 	@RequestMapping("/memberPage")
@@ -114,14 +121,26 @@ public class BoardController {
 		model.addAttribute(list);
 		return model;
 	}
-
-	// 얘는 검색해서 나온 페이지ㅣ
-	@RequestMapping("/searchingPage")
-	public Model getsearchBoardPagingList(@RequestParam("keyword") String keyword,
-			@RequestParam(value = "page", required = false) String page, Model model) {
-		List<BoardDTO> list = boardService.searchBoardPagingList(keyword, page);
-		model.addAttribute(list);
-		return model;
+	
+	@RequestMapping("/searchPage/subjectPage")
+	@ResponseBody  // 이 어노테이션을 추가하여 JSON 형식으로 응답
+	public ModelAndView getSubjectBoardPagingList(@RequestParam("keyword") String keyword,
+			@RequestParam(value = "page", required = false) String page) {
+		System.out.println("hi");
+		List<BoardDTO> list = boardService.searchBoardPagingList(keyword,page);
+		ModelAndView mav =  new ModelAndView("/searchPage/subjectSearchPage");
+		mav.addObject("list",list);
+	    return mav; 
 	}
+
+	
+	@RequestMapping("/searchingPage/loadpage")
+	@ResponseBody  // 이 어노테이션을 추가하여 JSON 형식으로 응답
+	public List<BoardDTO> getsearchBoardPagingList(@RequestParam("keyword") String keyword,
+			@RequestParam(value = "page", required = false) String page) {
+	    List<BoardDTO> list = boardService.searchBoardPagingList(keyword,page);
+	    return list; 
+	}
+
 
 }

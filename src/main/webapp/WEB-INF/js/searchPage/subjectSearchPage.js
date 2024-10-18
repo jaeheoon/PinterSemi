@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	let currentPage = 2;
+	let currentPage = 1;
 	let loading = false;
 	let keyword = new URLSearchParams(window.location.search).get('keyword'); // URL에서 키워드 가져오기
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 	function loadMoreData(page, keyword) {
 		$.ajax({
-			url: 'searchingPage',
+			url: '/Inbeomstagram/board/searchingPage/loadpage',
 			type: 'GET',
 			data: { page: page, keyword: keyword },  // 페이지 번호와 키워드 전달
 			dataType: 'json',

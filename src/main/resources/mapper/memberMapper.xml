@@ -10,10 +10,10 @@
     
     <!-- 회원가입 -->
     <insert id="join" parameterType="memberDTO">
-        INSERT INTO member(name, id, password, gender, email, phoneNumber, zipcode, address)
+        INSERT INTO member(name, id, password, gender, email, phoneNumber, zipcode, address, kakaoProfile, kakaoCheck)
         VALUES (#{name}, #{id}, #{password},
                 #{gender}, #{email}, #{phoneNumber},
-                #{zipcode}, #{address})
+                #{zipcode}, #{address}, #{kakaoProfile}, #{kakaoCheck})
     </insert>
     
     <!-- 로그인 -->
@@ -37,7 +37,8 @@
             zipcode = #{zipcode},
             address = #{address},
             userProfile = #{userProfile},
-            userOriginalProfile = #{userOriginalProfile}
+            userOriginalProfile = #{userOriginalProfile},
+            kakaoCheck = #{kakaoCheck}
         WHERE id = #{id}
     </update>
 

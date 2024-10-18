@@ -4,11 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 {
     "mypagelist": [
-        <c:forEach var="mypage" items="${mypagelist}" varStatus="status">
+        <c:forEach var="mypage" items="${list}" varStatus="status">
             {
                 "seq_board" : "${ mypage.seq_board }",
                 "seq_member" : "${ mypage.seq_member}",
-                "image": "${ mypage.image}",
+                "image": "${ mypage.imageFileName}",
+                "imageOriginalFileName" : "${mypage.imageOriginalFileName}",
                 "imageSubject" : "${ mypage.imageSubject }",
                 "imageContent" : "${ mypage.imageContent }",
                 "hit":"${ mypage.hit }",

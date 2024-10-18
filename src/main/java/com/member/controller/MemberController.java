@@ -160,6 +160,7 @@ public class MemberController {
 		if (userProfileImg != null) memberDTO.setKakaoCheck("F");	//카카오 사용자가 변경할 사진을 넣었을땐 F
 		
 		memberService.update(memberDTO, userProfileImg);
+		session.removeAttribute("memDTO");
 		session.setAttribute("memDTO", memberDTO);
 	}
 	
@@ -194,4 +195,5 @@ public class MemberController {
         boolean isMatch = userNumber.equals(String.valueOf(number));
         return ResponseEntity.ok(isMatch);
     }
+    
 }

@@ -62,3 +62,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/logout.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member/join.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header/header.js"></script>
+<script type="text/javascript">
+	var seq_member = ${memDTO.seq_member};
+</script>
+<script type="text/javascript" scr="${pageContext.request.contextPath}/js/board/getBoardScrap.js"></script>

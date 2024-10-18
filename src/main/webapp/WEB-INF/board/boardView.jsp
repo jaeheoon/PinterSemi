@@ -27,7 +27,6 @@
 	<div id="main-content">
 		<form id="container" method="POST"
 			action="${pageContext.request.contextPath}/board/updateForm">
-			<input type="hidden" id="seq_member" name="seq_member" value="${sessionScope.memDTO.seq_member }">
 			<input type="hidden" id="name" name="name" value="${memDTO.name}">
 			<input type="hidden" id="seq_board" name="seq_board"
 				value="${boardDTO.seq_board }"> <input type="hidden"
@@ -48,7 +47,7 @@
 						viewBox="0 0 512 512">
 					<path
 							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" /></svg>
-					
+					<button type="button" id="scarpBtn"></button>
 					<p style="margin: 0;">${boardDTO.hit}</p>
 					<!-- 나중에 수정해야 함 -->
 					<span id="hitRate"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -65,11 +64,6 @@
 					</span>
 					</span>
 					<div id="pin-buttons">
-						<c:if test="${not empty memDTO.seq_member }">
-							<c:if test="${memDTO.seq_member != boardDTO.seq_member }">
-								<input type="button" id="scrapBtn" value="저장" />
-							</c:if>
-						</c:if>
 						<c:if test="${memDTO.seq_member == boardDTO.seq_member}">
 							<input type="submit" id="updateBtn" value="수정" />
 							<input type="button" id="deleteBtn" value="삭제" />
@@ -97,7 +91,7 @@
 				<!-- 댓글 영역 -->
 				<div id="comment-box">
 					<!-- 댓글 수 -->
-					<div id="comment-num">댓글 2개</div>
+					<div id="comment-num"></div>
 
 
 					<!-- 댓글 내용 -->
@@ -106,7 +100,8 @@
 							<input type="text" value="${memDTO.name }" />
 							<div class="comment-content">
 
-								<strong>${comment.name}</strong> : ${comment.commentContent}
+								<strong>${comment.name}: </strong>
+								<div class="comment_Content">${comment.commentContent}</span>
 								(${comment.logtime})
 								<!-- 로그인한 사용자와 댓글 작성자가 같을 때만 버튼을 표시 -->
 								<button class="options-btn" data-seq="${comment.seq_comment}">⋯</button>
@@ -145,8 +140,6 @@
 	</div>
 	<div id="searchMore">
 			<h4 style="text-align: center; margin-top:30px; color:black">더 찾아보기</h4>
-			<input type="text" value="${ memDTO.seq_member }">
-			<input type="text" value="${ boardDTO.seq_board }">
 			<section class="gallery" style="padding:2em 0;">
 				<c:forEach var="boardDTO" items="${list}">
 					<div class="grid-item">
@@ -159,7 +152,7 @@
 				</c:forEach>				
 			</section>
 		</div>
-	<script
+	<script>
 		src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
 		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
@@ -171,7 +164,6 @@
 		console.log(Kakao.isInitialized());		
 	</script>	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/board/boardScrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/boardView.js"></script>
 	<script>
 		function closePage() {

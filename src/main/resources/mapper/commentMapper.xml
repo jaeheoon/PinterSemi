@@ -5,8 +5,8 @@
  <mapper namespace="com.comment.dao.CommentDAO">
  	<!-- 댓글 작성 -->
 	<insert id="commentWrite" parameterType="commentDTO">
-		INSERT INTO CommentTable (seq_comment, seq_board, name, commentContent, logtime)
-    	VALUES (seq_comment_id.nextval, #{seq_board}, #{name}, #{commentContent}, SYSDATE)
+		INSERT INTO CommentTable (seq_board, name, commentContent)
+    	VALUES (#{seq_board}, #{name}, #{commentContent})
 	</insert>
  	<!-- 댓글 목록 -->
  	<select id="commentList" parameterType="long" resultType="commentDTO">

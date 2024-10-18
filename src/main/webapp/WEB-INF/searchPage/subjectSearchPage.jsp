@@ -22,7 +22,7 @@
 					<div class="grid-item">
 						<a	href="${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}">
 							<img
-							src="${pageContext.request.contextPath}/storage/${boardDTO.image}"
+							src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}"
 							alt="${boardDTO.imageSubject}" /> <span class="hit">${boardDTO.hit}</span>
 						</a>
 					</div>

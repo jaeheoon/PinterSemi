@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let currentPage = 0;  // 1페이지는 서버에서 로드됐으므로 2페이지부터 시작
+    let currentPage = 1;  // 1페이지는 서버에서 로드됐으므로 2페이지부터 시작
     let loading = false;
 
     // 스크롤 이벤트 감지
@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     function loadMoreData(page) {
         $.ajax({
-            url: '/board/searchPage',
+            url: '/Inbeomstagram/board/searchPage/loadpage',
             type: 'GET',
             data: { page: page },  // 페이지 번호 전달
             dataType: 'json',
@@ -23,6 +23,8 @@ $(document).ready(function() {
                     renderData(data);
                     currentPage++;  // 데이터 로드 후 다음 페이지를 준비
                     loading = false;
+                }else {
+                    loading = false; // 데이터가 없으면 로딩 플래그 해제
                 }
             },
             error: function() {
@@ -33,6 +35,7 @@ $(document).ready(function() {
 
     function renderData(data) {
         const $gallery = $('.gallery');
+        console.log("Rendering data:", data);
 
         data.forEach(function(boardDTO) {
             const seqBoard = boardDTO.seq_board;

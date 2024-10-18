@@ -101,11 +101,18 @@ public class BoardController {
 
 	// 얘는 그냥 탐색 페이지
 	@RequestMapping("/searchPage")
-	public ModelAndView getBoardPagingList(@RequestParam(value = "page", required = false) String page) {
-		List<BoardDTO> list = boardService.getBoardPagingList(page);
+	public ModelAndView getBoardPagingList() {
+		List<BoardDTO> list = boardService.getBoardPagingList("0");
 		ModelAndView mav = new ModelAndView("/searchPage/searchPage");
 		mav.addObject("list", list);
 		return mav;
+	}
+	
+	@RequestMapping("/searchPage/loadpage")
+	@ResponseBody  // 이 어노테이션을 추가하여 JSON 형식으로 응답
+	public List<BoardDTO> getBoardPagingList(@RequestParam(value = "page", required = false) String page) {
+	    List<BoardDTO> list = boardService.getBoardPagingList(page);
+	    return list; 
 	}
 
 	@RequestMapping("/memberPage")

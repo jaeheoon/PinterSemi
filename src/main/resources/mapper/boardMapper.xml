@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.dao.BoardDAO">
+	<!-- 핀 등록 -->
+	<insert id="boardWrite" parameterType="boardDTO">
+		INSERT INTO board
+		(seq_member, imageFileName, imageOriginalFileName, name,
+		imageSubject,
+		imageContent)
+		VALUES (#{seq_member}, #{imageFileName},
+		#{imageOriginalFileName}, #{name},
+		#{imageSubject}, #{imageContent})
+	</insert>
+
+	<!-- 게시물 목록 페이징 -->
+	<select id="getBoardPagingList" parameterType="Map"
+		resultType="boardDTO">
+		SELECT * FROM board
+		ORDER BY seq_board DESC
+		LIMIT #{startRow}, #{endRow} <!-- pageSize를 매개변수로 사용 -->
+	</select>
+
+	<!-- 게시물 총 개수 -->
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+
+
+	<!-- 게시물 상세 보기 -->
+	<select id="getBoard" parameterType="long" resultType="boardDTO">
+		SELECT *
+		FROM board WHERE seq_board = #{seq_board}
+	</select>
+
+	<!-- 게시물 수정 -->
+	<update id="boardUpdate" parameterType="boardDTO">
+		UPDATE board SET
+		imageFileName = #{imageFileName},
+		imageOriginalFileName =
+		#{imageOriginalFileName},
+		imageSubject = #{imageSubject},
+		imageContent =
+		#{imageContent}
+		WHERE seq_board = #{seq_board}
+	</update>
+
+	<!-- 게시물 삭제 -->
+
+	<delete id="boardDelete" parameterType="long">
+		DELETE FROM board WHERE
+		seq_board = #{seq_board}
+	</delete>
+
+	<!-- 이미지 없이 게시물 수정 -->
+	<update id="boardUpdateNotImage" parameterType="boardDTO">
+		UPDATE board SET
+		imageSubject = #{imageSubject},
+		imageContent = #{imageContent}
+		WHERE
+		seq_board = #{seq_board}
+	</update>
+
+	<!-- 마이페이지 내 게시물 -->
+	<select id="getMyBoardList" parameterType="long"
+		resultType="boardDTO">
+		SELECT * FROM board WHERE seq_member = #{seq_member}
+	</select>
+
+	<select id="searchBoardPagingList" parameterType="Map"
+		resultType="boardDTO">
+		SELECT * FROM board
+		WHERE imageSubject LIKE CONCAT('%', #{keyword},
+		'%')
+		OR imageContent LIKE CONCAT('%', #{keyword}, '%')
+		ORDER BY
+		seq_board DESC
+		LIMIT #{startRow}, #{endRow} <!-- pageSize를 사용하여 한번에 가져올 
+			개수 -->
+	</select>
+</mapper>
+

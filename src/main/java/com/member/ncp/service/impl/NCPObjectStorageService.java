@@ -38,7 +38,7 @@ public class NCPObjectStorageService implements ObjectStorageService {
 
 			ObjectMetadata objectMetadata = new ObjectMetadata();
 			objectMetadata.setContentType(userProfileImg.getContentType());
-
+ 
 			PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, directoryPath + imageFileName,
 					inputStream, objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObjectRequest);

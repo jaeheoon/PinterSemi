@@ -11,4 +11,8 @@ CREATE TABLE Member (
     address VARCHAR(300),         -- 주소 (add1 + add2)
     admin ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
     logtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP   -- 회원 가입 시간
+    kakaoCheck VARCHAR(3) DEFAULT 'F',			  -- 카카오 사용자인지 확인
+    kakaoProfile VARCHAR(4000),					  -- 카카오 프로필 사진
+    userProfile VARCHAR(4000),					  -- 사용자 프로필 사진 UUID
+    userOriginalProfile VARCHAR(4000)			  -- 사용자 프로필 사진 이름
 );

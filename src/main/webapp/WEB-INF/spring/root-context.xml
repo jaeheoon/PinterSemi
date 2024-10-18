@@ -11,6 +11,7 @@
 	
 	<context:component-scan base-package="com.member.service.impl
 										  com.member.service.kakao
+										  com.mail.service
 										  com.member.ncp.service
 										  com.member.ncp.service.impl
 										  com.board.service.impl

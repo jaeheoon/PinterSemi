@@ -9,14 +9,20 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.board.bean.BoardDTO;
+import com.mail.service.MailService;
 import com.member.bean.MemberDTO;
 import com.member.service.MemberService;
 import com.member.service.kakao.KakaoService;
@@ -26,9 +32,10 @@ import com.member.service.kakao.KakaoService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private KakaoService kakaoService;
+	@Autowired
+	private MailService mailService;
 	
 	@RequestMapping(value = "/checkId")
 	@ResponseBody
@@ -94,10 +101,12 @@ public class MemberController {
 	public String updateForm() {
 		return "/member/updateForm";
 	}
-
 	
 	@RequestMapping(value = "/kakao/login")
-	public String getCI(@RequestParam String code, Model model) throws IOException {
+	public String getCI(@RequestParam String code, 
+			HttpSession session,
+			Model model, 
+			RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("code = " + code);
 		String access_token = kakaoService.getToken(code);
 		System.out.println("access_token : " + access_token);
@@ -107,11 +116,24 @@ public class MemberController {
         System.out.println("email : " + userInfo.get("email"));
         System.out.println("profile_image : " + userInfo.get("profile_image"));
         
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
+        //아이디 검색
+        boolean check = memberService.checkId(userInfo.get("email")+"");
+        System.out.println(check);
+        if (!check) {
+        	redirectAttributes.addFlashAttribute("code", code);
+        	redirectAttributes.addFlashAttribute("check", check);
+        	redirectAttributes.addFlashAttribute("access_token", access_token);
+        	redirectAttributes.addFlashAttribute("userInfo", userInfo);
+        	return "redirect:/";
+		} else {
+			MemberDTO memberDTO = memberService.getMember(userInfo.get("email")+"");
+			
+			session.setAttribute("memDTO", memberDTO);
+			model.addAttribute("userInfo", userInfo);
+			model.addAttribute("access_token", access_token);
+			return "/index";
+		}
         
-		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/update")
@@ -134,4 +156,30 @@ public class MemberController {
 		memberService.update(memberDTO, userProfileImg);
 		session.setAttribute("memDTO", memberDTO);
 	}
+	
+	// 인증 이메일 전송
+	@PostMapping("/mailSend")
+	@ResponseBody
+    public HashMap<String, Object> mailSend(String mail) {
+        HashMap<String, Object> map = new HashMap<>();
+        try {
+            mailService.sendMail(mail);
+            int num = mailService.getVerificationNumber(mail);
+
+            map.put("success", Boolean.TRUE);
+            map.put("number", num);
+        } catch (Exception e) {
+            map.put("success", Boolean.FALSE);
+            map.put("error", e.getMessage());
+        }
+
+        return map;
+    }
+	
+	// 인증번호 일치여부 확인
+    @GetMapping("/mailCheck")
+    public ResponseEntity<?> mailCheck(@RequestParam String mail, @RequestParam int userNumber) {
+        boolean isMatch = mailService.checkVerificationNumber(mail, userNumber);
+        return ResponseEntity.ok(isMatch);
+    }
 }

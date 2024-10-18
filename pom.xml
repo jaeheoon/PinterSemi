@@ -321,7 +321,7 @@
 	                                </includes>
 	                            </resource>
 	                        </resources>
-	                    </configuration>
+	                    </configuration>  
 	                </execution>
 	            </executions>
 	        </plugin>

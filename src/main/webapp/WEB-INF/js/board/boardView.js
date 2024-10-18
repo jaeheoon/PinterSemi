@@ -26,6 +26,31 @@ $(document).ready(function() {
     function updateCommentCount(count) {
         $('#comment-num').text('댓글 ' + count + '개');
     }
+    
+    $('#likeIcon').on('click', function() {
+        const seqBoard = $('#data').data('seq-board');
+        const seqMember = $('#seq_member').val(); // seq_member 가져오기
+        const isActive = $(this).hasClass('active');
+        
+        
+        
+        $.ajax({
+            type: 'POST',
+            url: isActive ? '/Inbeomstagram/board/unlike' : '/Inbeomstagram/board/like',
+            data: { seq_board: seqBoard, seq_member: seqMember }, 
+            success: function(data) {
+                if (data.status === 'success') {
+                    $('#likeIcon').toggleClass('active'); // 좋아요 상태 토글
+                    $('#likeCount').text(data.likeCount); // 좋아요 수 업데이트
+                } else {
+                    alert(data.message); // 실패 메시지 표시
+                }
+            },
+            error: function() {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+        });
+    });
 
     // 삭제 버튼 클릭 이벤트
  // 삭제 버튼 클릭 이벤트
@@ -247,6 +272,7 @@ $(document).ready(function() {
 });
 function onLoadpage() {
     const seqBoard = $('#data').data('seq-board');
+    const seqMember = $('#seq_member').val(); 
 
     // 조회수 증가
     $.ajax({
@@ -285,6 +311,24 @@ function onLoadpage() {
         },
         error: function() {
             alert('댓글을 불러오는 데 실패했습니다.');
+        }
+    });
+    
+    $.ajax({
+        type: 'POST',
+        url: '/Inbeomstagram/board/loadLikes',
+        data: { seq_board: seqBoard, seq_member: seqMember },
+        success: function(data) {
+        	console.log('loadLikes'+data);
+            if (data.status === "success") {
+                $('#likeIcon').toggleClass('active', data.liked); // 좋아요 상태에 따라 토글
+                $('#likeCount').text(data.likeCount); // 좋아요 수 업데이트
+            } else {
+                alert(data.message);
+            }
+        },
+        error: function() {
+            alert('좋아요 정보를 불러오는 데 실패했습니다.');
         }
     });
 }

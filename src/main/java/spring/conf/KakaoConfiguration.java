@@ -15,4 +15,5 @@ public class KakaoConfiguration {
 	private @Value("${kakao.client_id}") String clientId;
 	private @Value("${kakao.redirect_uri}") String redirectUri;
 	private @Value("${kakao.client_secret}") String clientSecret;
+	private @Value("${kakao.java_script_api_key}")String javaScriptKey;
 }

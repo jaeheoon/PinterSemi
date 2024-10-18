@@ -102,7 +102,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/kakao/login")
-	public String getCI(@RequestParam String code, HttpSession session, Model model,
+	public String getCI(@RequestParam("code") String code, HttpSession session, Model model,
 			RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("code = " + code);
 		String access_token = kakaoService.getToken(code);

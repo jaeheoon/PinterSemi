@@ -67,3 +67,37 @@ body {
 .grid-item:hover::after {
     opacity: 1; /* hover 시 오버레이 보이기 */
 }
+
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr); /* 화면 너비가 1024px 이하일 때 3열 */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 화면 너비가 768px 이하일 때 2열 */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr; /* 화면 너비가 480px 이하일 때 1열 */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        gap: 1rem;
+    }
+}
+
+.grid-item .hit {
+    font-size: 1rem; /* 기본 텍스트 크기 */
+}
+
+@media (max-width: 768px) {
+    .grid-item .hit {
+        font-size: 0.9rem; /* 모바일에서 텍스트 크기 감소 */
+    }
+}

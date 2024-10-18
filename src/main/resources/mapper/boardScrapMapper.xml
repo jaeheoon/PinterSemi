@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boardscrap.dao.BoardScrapDAO">
+	
+	<!-- 사용자 이미지 스크랩 -->
+	<insert id="scrap">
+		INSERT INTO boardscrap (
+			seq_board, seq_member, imageFileName,
+			imageOriginalFileName, name, imageSubject
+			)
+		VALUES (
+			#{seq_board}, #{seq_member}, #{imageFileName},
+			#{imageOriginalFileName}, #{name}, #{imageSubject}
+		)
+	</insert>
+	
+	<!-- 사용자가 스크랩한 이미지 조회 -->
+	<select id="getScrapBoard" resultType="long">
+		select seq_board from boardScrap where seq_member = #{seq_member}
+	</select>
+</mapper>

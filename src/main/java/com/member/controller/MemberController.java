@@ -155,6 +155,7 @@ public class MemberController {
 		memberDTO.setPhoneNumber(tel1 + "-" + tel2 + "-" + tel3);
 		
 		memberService.update(memberDTO, userProfileImg);
+		session.removeAttribute("memDTO");
 		session.setAttribute("memDTO", memberDTO);
 	}
 	
@@ -183,4 +184,5 @@ public class MemberController {
         boolean isMatch = userNumber.equals(String.valueOf(number));
         return ResponseEntity.ok(isMatch);
     }
+    
 }

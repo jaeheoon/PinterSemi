@@ -19,13 +19,14 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.board.bean.BoardDTO;
+import com.boardscrap.bean.BoardScrapDTO;
 import com.comment.bean.CommentDTO;
 import com.member.bean.MemberDTO;
 
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:spring/db.properties")
-@MapperScan("com.member.dao com.board.dao com.comment.dao")
+@MapperScan("com.member.dao com.board.dao com.comment.dao com.boardscrap.dao")
 public class SpringConfiguration {
 	private @Value("${jdbc.driver}") String driver;
 	private @Value("${jdbc.url}") String url;
@@ -86,5 +87,11 @@ public class SpringConfiguration {
 	@Scope("prototype")
 	public CommentDTO commentDTO() {
 		return new CommentDTO();
+	}
+	
+	@Bean
+	@Scope("prototype")
+	public BoardScrapDTO boardScrapDTO() {
+		return new BoardScrapDTO();
 	}
 }

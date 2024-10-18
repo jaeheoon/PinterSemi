@@ -56,7 +56,6 @@ $(document).ready(function() {
 	}
 
 	function resizeGridItems() {
-		console.log('hi');
 		$('.grid-item').each(function() {
 			var $gridItem = $(this);
 			imagesLoaded(this, function() {

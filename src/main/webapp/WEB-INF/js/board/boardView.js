@@ -78,15 +78,24 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/Inbeomstagram/comment/commentList',
-            data: { 'seq_board': seqBoard },
-            dataType: 'json',
-            success: function(data) {
-                console.log('데이터 받아왔다 목록 : ', data);
-                updateCommentList(data.commentList);
-                updateCommentCount(data.commentList.length);
+            data: { seq_board: seqBoard },  // seq_board를 실제 값으로 설정
+            success: function(commentList) {
+                var commentHtml = '';
+                
+                // 받은 댓글 데이터를 기반으로 HTML 생성
+                commentList.forEach(function(comment) {
+                    commentHtml += '<div class="comment-content">'
+                                 + '<strong>' + comment.name + '</strong> : ' + comment.commentContent
+                                 + ' (' + comment.logtime + ')'
+                                 + '<button class="options-btn" data-seq="' + comment.seq_comment + '">⋯</button>'
+                                 + '</div>';
+                });
+                
+                // 동적으로 comment-list에 삽입
+                $('#comment-list').html(commentHtml);
             },
-            error: function(e) {
-                console.log("댓글 로드 실패: ", e);
+            error: function() {
+                alert('댓글을 불러오는 데 실패했습니다.');
             }
         });
     }
@@ -160,7 +169,7 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 type: 'POST',
-                url: '/Inbeomstagram/comment/commentWrite.do',
+                url: '/Inbeomstagram/comment/write',
                 data: {
                     'commentContent': $('#commentContent').val(),
                     'name': name,
@@ -168,10 +177,14 @@ $(document).ready(function() {
                 },
                 dataType: 'json',
                 success: function(data) {
-                    alert("댓글 등록 완료");
-                    $('#commentContent').val('');
-                    updateCommentList(data.commentList);
-                    updateCommentCount(data.commentList.length);
+                	if (data.status === "success") {
+                        alert("댓글 등록 완료");
+                        $('#commentContent').val(''); // 입력 필드 초기화
+                        updateCommentList(data.commentList); // 댓글 목록 업데이트
+                        updateCommentCount(data.commentList.length); // 댓글 수 업데이트
+                    } else {
+                        alert(data.message); // 실패 메시지 표시
+                    }
                 },
                 error: function(e) {
                     console.log("댓글 작성 실패: ", e);

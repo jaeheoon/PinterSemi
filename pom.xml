@@ -40,35 +40,35 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>5.3.10.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- Spring Security Web -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-web</artifactId>
-		    <version>5.3.10.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- Spring Security Config -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
-		    <version>5.3.10.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- OAuth2 Client -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-oauth2-client</artifactId>
-		    <version>5.3.10.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- OAuth2 Core -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-oauth2-core</artifactId>
-		    <version>5.3.10.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<!-- Email 인증 -->
@@ -240,10 +240,10 @@
 				
 		<!-- Servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>

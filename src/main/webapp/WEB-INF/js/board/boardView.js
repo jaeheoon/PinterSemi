@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
     const picker = new EmojiButton({
         position: 'bottom-start'
     });
@@ -54,51 +55,6 @@ $(document).ready(function() {
             console.log("삭제가 취소되었습니다.");  // 삭제 취소 시 로그 출력
         }
     });
-
-
-    // 페이지 로드 시 실행되는 함수
-    function onLoadpage() {
-        const seqBoard = $('#data').data('seq-board');
-
-        // 조회수 증가
-        $.ajax({
-            type: 'POST',
-            url: '/Inbeomstagram/comment/hitUpdate',
-            data: { 'seq_board': seqBoard },
-            dataType: 'json',
-            success: function(response) {
-                console.log('조회수 증가 성공: ', response);
-            },
-            error: function(e) {
-                console.log("조회수 증가 AJAX 실패: ", e);
-            }
-        });
-
-        // 댓글 로드
-        $.ajax({
-            type: 'POST',
-            url: '/Inbeomstagram/comment/commentList',
-            data: { seq_board: seqBoard },  // seq_board를 실제 값으로 설정
-            success: function(commentList) {
-                var commentHtml = '';
-                
-                // 받은 댓글 데이터를 기반으로 HTML 생성
-                commentList.forEach(function(comment) {
-                    commentHtml += '<div class="comment-content">'
-                                 + '<strong>' + comment.name + '</strong> : ' + comment.commentContent
-                                 + ' (' + comment.logtime + ')'
-                                 + '<button class="options-btn" data-seq="' + comment.seq_comment + '">⋯</button>'
-                                 + '</div>';
-                });
-                
-                // 동적으로 comment-list에 삽입
-                $('#comment-list').html(commentHtml);
-            },
-            error: function() {
-                alert('댓글을 불러오는 데 실패했습니다.');
-            }
-        });
-    }
 
     // 페이지 닫기 함수
     function closePage() {
@@ -249,10 +205,9 @@ $(document).ready(function() {
         if (confirmation) {
             $.ajax({
                 type: 'POST',
-                url: '/Inbeomstagram/comment/commentDelete.do',
+                url: '/Inbeomstagram/comment/delete',
                 data: {
-                    'seq_comment': seqComment,
-                    'seq_board': seqBoard
+                    'seq_comment': seqComment
                 },
                 success: function() {
                     alert("댓글이 삭제되었습니다.");
@@ -266,25 +221,31 @@ $(document).ready(function() {
             console.log("삭제가 취소되었습니다.");
         }
     });
-
-    // 댓글 수정 버튼 이벤트
     $(document).on('click', '#edit-btn', function(event) {
         event.preventDefault();
-
-        const $commentContent = $(this).closest('#comment-content');
-        const seqComment = $(this).data('seq');
-
-        const currentComment = $commentContent.clone()
-            .children().remove().end()
-            .text().trim()
-            .replace(/\s*\([^)]*\)\s*$/, '').trim();
-
-        const editHtml = '<textarea id="edit-comment">' + currentComment + '</textarea>' +
-            '<button id="save-edit-btn" data-seq="' + seqComment + '">저장</button>' +
-            '<button id="cancel-edit-btn">취소</button>';
-
+        
+        // 클릭된 댓글 영역
+        var $commentContent = $(this).closest('.comment-content');  
+        
+        // seq_comment 가져오기
+        var seqComment = $(this).data('seq');
+        
+        console.log("seq :", seqComment);
+        
+        // <span> 태그 안의 댓글 내용만 가져오기
+        var currentComment = $commentContent.find('.comment_Content').text().trim();
+        
+        console.log("currentComment :", currentComment);
+        
+        var editHtml = 
+        '<textarea id="edit-comment">' + currentComment + '</textarea>' +
+        '<button id="save-edit-btn" data-seq="' + seqComment + '">저장</button>' +
+        '<button id="cancel-edit-btn">취소</button>';
+                
+        // 기존 댓글 내용을 수정 창으로 교체
         $commentContent.html(editHtml);
     });
+    
 
     // 댓글 수정 저장 버튼 이벤트
     $(document).on('click', '#save-edit-btn', function(event) {
@@ -296,7 +257,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/Inbeomstagram/comment/commentUpdate.do',
+            url: '/Inbeomstagram/comment/update',
             data: {
                 'seq_comment': seqComment,
                 'seq_board': seqBoard,
@@ -321,3 +282,47 @@ $(document).ready(function() {
     // 페이지 로드 시 실행
     onLoadpage();
 });
+function onLoadpage() {
+    const seqBoard = $('#data').data('seq-board');
+
+    // 조회수 증가
+    $.ajax({
+        type: 'POST',
+        url: '/Inbeomstagram/comment/hitUpdate',
+        data: { 'seq_board': seqBoard },
+        dataType: 'json',
+        success: function(response) {
+            console.log('조회수 증가 성공: ', response);
+        },
+        error: function(e) {
+            console.log("조회수 증가 AJAX 실패: ", e);
+        }
+    });
+
+    // 댓글 로드
+    $.ajax({
+        type: 'POST',
+        url: '/Inbeomstagram/comment/commentList',
+        data: { seq_board: seqBoard },  // seq_board를 실제 값으로 설정
+        success: function(commentList) {
+            var commentHtml = '';
+            
+            // 받은 댓글 데이터를 기반으로 HTML 생성
+            commentList.forEach(function(comment) {
+                commentHtml += '<div class="comment-content">'
+                             + '<strong>' + comment.name + '</strong> : ' + comment.commentContent
+                             + ' (' + comment.logtime + ')'
+                             + '<button class="options-btn" data-seq="' + comment.seq_comment + '">⋯</button>'
+                             + '</div>';
+            });
+            
+            // 동적으로 comment-list에 삽입
+            $('#comment-list').html(commentHtml);
+            $('#comment-num').text('댓글 ' + commentList.length + '개');
+        },
+        error: function() {
+            alert('댓글을 불러오는 데 실패했습니다.');
+        }
+    });
+}
+

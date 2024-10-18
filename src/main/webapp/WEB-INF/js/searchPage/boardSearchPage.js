@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	let currentPage = 1;
+	let currentPage = 0;
 	let loading = false;
 	let keyword = $('#data').data('board-name');
-	console.log(keyword)
+	console.log(keyword);
 
 	// 스크롤 이벤트 감지
 	$(window).scroll(function() {
@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 	function loadMoreData(page, keyword) {
 		$.ajax({
-			url: '/Inbeomstagram/searchPage/searchingPage',
+			url: '/Inbeomstagram/board/searchingPage/loadpage',
 			type: 'GET',
 			data: { page: page, keyword: keyword },  // 페이지 번호와 키워드 전달
 			dataType: 'json',
@@ -37,14 +37,14 @@ $(document).ready(function() {
 
 		data.forEach(function(boardDTO) {
 			const seqBoard = boardDTO.seq_board;
-			const image = boardDTO.image;
+			const image = boardDTO.imageFileName;
 			const imageSubject = boardDTO.imageSubject;
 			const hit = boardDTO.hit;
 
 			const newItem = `
 		            <div class="grid-item">
 		                <a href="${contextPath}/board/boardView?seq_board=${seqBoard}">		                
-		                    <img src="${contextPath}/storage/${image}" alt="${imageSubject}" />
+		                    <img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${image}" alt="${imageSubject}" />
 		                    <span class="hit">${hit}</span>
 		                </a>
 		            </div>`;

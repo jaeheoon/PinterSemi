@@ -91,7 +91,7 @@
 				<!-- 댓글 영역 -->
 				<div id="comment-box">
 					<!-- 댓글 수 -->
-					<div id="comment-num">댓글 2개</div>
+					<div id="comment-num"></div>
 
 
 					<!-- 댓글 내용 -->
@@ -100,7 +100,8 @@
 							<input type="text" value="${memDTO.name }" />
 							<div class="comment-content">
 
-								<strong>${comment.name}</strong> : ${comment.commentContent}
+								<strong>${comment.name}: </strong>
+								<div class="comment_Content">${comment.commentContent}</span>
 								(${comment.logtime})
 								<!-- 로그인한 사용자와 댓글 작성자가 같을 때만 버튼을 표시 -->
 								<button class="options-btn" data-seq="${comment.seq_comment}">⋯</button>
@@ -151,7 +152,7 @@
 				</c:forEach>				
 			</section>
 		</div>
-	<script
+	<script>
 		src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
 		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"

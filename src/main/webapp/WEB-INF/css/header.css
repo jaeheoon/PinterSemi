@@ -204,3 +204,22 @@ select[name="tel1"], input[name="tel2"], input[name="tel3"] {
 #emailCheck {
 	margin-top: 3%;
 }
+
+.p-2 {
+	padding: 0px;
+}
+
+#kakao-loginBtn {
+	height: 60px;
+	width: 93%;
+}
+
+#kakao-footer {
+	text-align: center;
+}
+
+#loginBtn {
+	width: 100%;
+	height: 60px;
+	font-size: 1.3rem;
+}

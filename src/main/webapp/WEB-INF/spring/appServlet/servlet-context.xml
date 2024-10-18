@@ -25,6 +25,7 @@
 										  com.board.controller
 										  com.boardscrap.controller
 										  com.comment.controller
+										  com.likes.controller
 										  "/>
 	
 	<!-- DispatcherServlet으로 못가게끔 설정 -->

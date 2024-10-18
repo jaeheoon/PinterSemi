@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.likes.dao.LikesDAO">
+
+    <!-- 좋아요 생성 -->
+    <insert id="addLike" parameterType="long">
+        INSERT INTO likes (seq_board, seq_member)
+        VALUES (#{seqBoard}, #{seqMember})
+    </insert>
+
+    <!-- 좋아요 삭제 -->
+    <delete id="removeLike" parameterType="long">
+        DELETE FROM likes
+        WHERE seq_board = #{seqBoard}
+          AND seq_member = #{seqMember}
+    </delete>
+
+    <!-- 특정 게시물에 대한 좋아요 여부 확인 -->
+    <select id="isLikedByMember" parameterType="long" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM likes
+        WHERE seq_board = #{seqBoard}
+          AND seq_member = #{seqMember}
+    </select>
+
+    <!-- 특정 게시물의 좋아요 수 조회 -->
+    <select id="countLikesByBoard" parameterType="long" resultType="int">
+        SELECT COUNT(*)
+        FROM likes
+        WHERE seq_board = #{seqBoard}
+    </select>
+
+</mapper>

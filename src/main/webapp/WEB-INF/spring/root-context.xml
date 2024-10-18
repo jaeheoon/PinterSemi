@@ -17,6 +17,7 @@
 										  com.board.service.impl
 										  com.boardscrap.service.impl
 										  com.comment.service.impl
+										  com.likes.service.impl
 										  spring.conf"/>
 		
 </beans>

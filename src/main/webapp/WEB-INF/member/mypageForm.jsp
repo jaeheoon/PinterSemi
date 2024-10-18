@@ -13,16 +13,30 @@
 <form id="mypage">
 	<div class="mypage">
 		<div class="profile">
-			<c:choose>
-				<c:when  test="${not empty memDTO.userProfile }">
-					<a href="/Inbeomstagram/member/updateForm" />
-						<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile }"  alt="${memDTO.userOriginalProfile }"/>
-					</a>
-				</c:when>
-				<c:when test="${empty memDTO.userProfile }">
-					<input type="button" value="H" class="submitprofile" onclick="location.href='/Inbeomstagram/member/updateForm'"/>
-				</c:when>
-			</c:choose>
+			<c:if test="${ memDTO.kakaoCheck == 'F' }">
+				<c:choose>
+					<c:when test="${not empty memDTO.userProfile }">
+						<a href="/Inbeomstagram/member/updateForm" >
+							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${ memDTO.userProfile }" alt="${memDTO.userOriginalProfile }" />
+						</a>
+					</c:when>
+					<c:when test="${empty memDTO.userProfile }">
+						<input type="button" value="H" class="submitprofile" onclick="location.href='/Inbeomstagram/member/updateForm'"/>
+					</c:when>
+				</c:choose>
+			</c:if>
+			<c:if test="${ memDTO.kakaoCheck == 'T' }">
+				<c:choose>
+					<c:when test="${not empty memDTO.kakaoProfile }">
+						<a href="/Inbeomstagram/member/updateForm" >
+							<img src="${ memDTO.kakaoProfile }" alt="카카오 사진" />
+						</a>
+					</c:when>
+					<c:when test="${empty memDTO.kakaoProfile }">
+						<input type="button" value="H" class="submitprofile" onclick="location.href='/Inbeomstagram/member/updateForm'"/>
+					</c:when>
+				</c:choose>
+			</c:if>
 		</div>
 		<div class="username">
 			${memDTO.name }

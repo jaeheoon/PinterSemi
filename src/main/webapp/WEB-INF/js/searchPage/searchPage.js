@@ -45,7 +45,7 @@ $(document).ready(function() {
 
             const newItem = `
                 <div class="grid-item">
-                    <a href="/board/boardView?seq_board=${seqBoard}">
+                    <a href="/Inbeomstagram/board/boardView?seq_board=${seqBoard}">
                         <img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${image}" alt="${imageSubject}" />
                         <span class="hit">${hit}</span>
                     </a>

@@ -8,20 +8,12 @@ target/
 target/
 build/
 
-<<<<<<< HEAD
 # src/main/resources/spring 아래의 모든 파일을 무시
-=======
-# src/main/resources/spring 아래의 모든 파일을 무시
->>>>>>> 4078c9fd6d2191a142535302797bcd22b873970a
 /src/main/resources/spring/db.properties
 /src/main/resources/spring/naver.properties
 /src/main/resources/spring/kakao.properties
 /src/main/resources/spring/email.properties
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 4078c9fd6d2191a142535302797bcd22b873970a
 # .properties 파일 무시 (모든 .properties 파일)
 *.properties
 

@@ -18,6 +18,11 @@ pipeline {
                 ])
             }
         }
+        stage('Update Submodules') {
+            steps {
+                sh 'git submodule update --init --recursive'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'

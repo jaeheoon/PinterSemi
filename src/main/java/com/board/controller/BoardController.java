@@ -146,6 +146,4 @@ public class BoardController {
 	    List<BoardDTO> list = boardService.searchBoardPagingList(keyword,page);
 	    return list; 
 	}
-
-
 }

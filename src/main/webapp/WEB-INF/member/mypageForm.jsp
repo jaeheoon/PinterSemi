@@ -115,6 +115,7 @@ $(document).ready(function() {
                 } else {
                     boardList.append("<p class='no-data-message'>아직 저장된 핀이 없네요! 저장하고 싶은 핀들을 저장하세요!</p>");
 
+                    createPinButton.remove();
                     scrapPinButton.on("click", function() {
                         window.location.href = "/Inbeomstagram/board/searchPage";
                     });
@@ -160,6 +161,7 @@ $(document).ready(function() {
                 } else {
                     boardList.append("<p class='no-data-message'>아직 만든 핀이 없네요! 저장하고 싶은 핀들을 만드세요!</p>");
 
+                    scrapPinButton.remove();
                     createPinButton.on("click", function() {
                         window.location.href = "/Inbeomstagram/board/boardWriteForm";
                     });

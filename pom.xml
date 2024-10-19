@@ -312,6 +312,7 @@
 	                    </goals>
 	                    <configuration>
 	                        <outputDirectory>${project.build.directory}/spring</outputDirectory> <!-- 붙여넣을 위치 -->
+
 	                        <resources>
 	                            <resource>
 	                                <directory>${project.basedir}/spring</directory> <!-- 복사할 파일의 디렉토리 -->

@@ -25,7 +25,7 @@ public class EMailConfiguration {
     private @Value("${spring.mail.properties.mail.smtp.auth}") String auth;
     private @Value("${spring.mail.properties.mail.smtp.timeout}") String timeout;
     private @Value("${spring.mail.properties.mail.smtp.starttls.enable}") String enable;
-  
+
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

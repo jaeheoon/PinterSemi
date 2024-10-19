@@ -9,10 +9,11 @@ target/
 build/
 
 # src/main/resources/spring 아래의 모든 파일을 무시
-#/src/main/resources/spring/mybatis-config.xml
 #/src/main/resources/spring/db.properties
 #/src/main/resources/spring/naver.properties
 #/src/main/resources/spring/kakao.properties
+#/src/main/resources/spring/email.properties
+
 # .properties 파일 무시 (모든 .properties 파일)
 #*.properties
 

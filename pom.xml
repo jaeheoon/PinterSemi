@@ -311,7 +311,7 @@
 	                        <goal>copy-resources</goal>
 	                    </goals>
 	                    <configuration>
-	                        <outputDirectory>${project.build.directory}/spring</outputDirectory> <!-- 붙여넣을 위치 -->
+	                        <outputDirectory>${project.build.directory}/src/main/resources/spring</outputDirectory> <!-- 붙여넣을 위치 -->
 
 	                        <resources>
 	                            <resource>

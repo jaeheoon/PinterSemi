@@ -97,7 +97,7 @@ header {
 	margin-right: 10px;
 }
 @media screen and (max-width: 768px){
-	.auth-buttons a,
+	.auth-buttons .info,
 	.auth-buttons button{
 		display: none;
 	}

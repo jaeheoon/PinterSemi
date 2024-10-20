@@ -8,6 +8,7 @@ target/
 target/
 build/
 
+# src/main/resources/spring 아래의 모든 파일을 무시
 /src/main/resources/spring/db.properties
 /src/main/resources/spring/naver.properties
 /src/main/resources/spring/kakao.properties

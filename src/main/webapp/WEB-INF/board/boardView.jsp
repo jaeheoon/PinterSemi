@@ -54,7 +54,6 @@
 						</svg>
 
 					<p id="likeCount" style="margin: 0;"></p>
-					<!-- 나중에 수정해야 함 -->
 					<span id="hitRate"> <svg xmlns="http://www.w3.org/2000/svg"
 							id="hitIcon" viewBox="0 0 448 512">
 						<path
@@ -118,8 +117,8 @@
 
 					<!-- 댓글 작성 -->
 					<div id="comment-input" style="display: flex; align-items: center;">
-						<div id="memberProfileImage">
-							<img src="${pageContext.request.contextPath}/img/imoji.png"
+						<div id="memberProfileImage">							
+							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
 								alt="유저 프로필 이미지">
 						</div>
 						<input type="text" id="commentContent" name="commentContent"

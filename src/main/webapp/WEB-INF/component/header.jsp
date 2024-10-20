@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/Inbeomstagram/css/header.css">
+</head>
 <header>
 	<div class="logo">
 		<a href="${pageContext.request.contextPath}/"> <!-- 홈으로 이동할 수 있는 로고 -->

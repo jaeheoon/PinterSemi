@@ -218,6 +218,7 @@ h4 {
     align-items: center; /* 수직 중앙 정렬 */
     gap: 10px; /* 요소들 간의 간격 */
 }
+
 #likeIcon {
     width: 30px;
     height: 30px;

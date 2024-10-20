@@ -103,14 +103,7 @@
 
 					<!-- 댓글 내용 -->
 					<div id="comment-list">
-						<c:forEach var="comment" items="${commentList}">
-							<input type="text" value="${memDTO.name }" />
-							<div class="comment-content">
-								<strong>${comment.name}: </strong> <span class="comment_Content">${comment.commentContent}</span>
-								(${comment.logtime})
-								<button class="options-btn" data-seq="${comment.seq_comment}">⋯</button>
-							</div>
-						</c:forEach>
+						
 					</div>
 
 

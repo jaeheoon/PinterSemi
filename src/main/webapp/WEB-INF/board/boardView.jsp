@@ -81,7 +81,7 @@
 				<!-- 작성자 -->
 				<div id="userName">
 					<c:choose>
-						<c:when test="${memDTO.kakaoCheck == 'F'}">
+						<c:when test="${memDTO.userProfile != null}">
 							<img
 								src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
 								alt="유저 프로필 이미지">
@@ -126,7 +126,7 @@
 					<div id="comment-input" style="display: flex; align-items: center;">
 						<div id="memberProfileImage">
 							<c:choose>
-								<c:when test="${memDTO.kakaoCheck == 'F'}">
+								<c:when test="${memDTO.userProfile != null}">
 									<img
 										src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
 										alt="유저 프로필 이미지">

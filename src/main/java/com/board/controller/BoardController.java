@@ -146,4 +146,22 @@ public class BoardController {
 	    List<BoardDTO> list = boardService.searchBoardPagingList(keyword,page);
 	    return list; 
 	}
+	
+	@RequestMapping(value = "/getBoardMemberProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> getBoardMemberProfile(@RequestParam("seq_member") String seq_member) {		
+		Map<String, String> result = new HashMap<>();
+		try {
+			String profile = boardService.getBoardMemberProfile(seq_member);
+			result.put("status", "success");
+			result.put("profile", profile);
+			result.put("message", "작성자 이미지 불러오기 성공");
+		} catch (Exception e) {
+			result.put("status", "error");
+			result.put("message", "작성자 이미지 불러오기 실패");
+			e.printStackTrace();
+		}
+		return result;
+
+	}
 }

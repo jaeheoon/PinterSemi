@@ -53,7 +53,6 @@ $(document).ready(function() {
         });
     });
 
-    // 삭제 버튼 클릭 이벤트
  // 삭제 버튼 클릭 이벤트
     $('#deleteBtn').on('click', function() {
         const confirmation = confirm("정말 삭제하시겠습니까?");

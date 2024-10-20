@@ -68,7 +68,7 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.status === 'success') {
                         alert(response.message);  // 성공 메시지 표시
-                        location.href = '/Inbeomstagram/';  // 삭제 후 메인 페이지로 이동
+                        location.href = '/Inbeomstagram/board/searchPage';  // 삭제 후 메인 페이지로 이동
                     } else {
                         alert('삭제 실패: ' + response.message);  // 오류 메시지 표시
                     }
@@ -176,9 +176,6 @@ $(document).ready(function() {
 
         updateCommentCount(commentList.length);
     }
-
-
-
 
     // 수정/삭제 옵션 버튼 클릭 이벤트
     $(document).on('click', '.options-btn', function(event) {

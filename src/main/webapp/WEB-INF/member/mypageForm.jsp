@@ -13,30 +13,19 @@
 <form id="mypage">
 	<div class="mypage">
 		<div class="profile">
-			<c:if test="${ memDTO.kakaoCheck == 'F' }">
-				<c:choose>
-					<c:when test="${not empty memDTO.userProfile }">
-						<a href="/Inbeomstagram/member/updateForm" >
-							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${ memDTO.userProfile }" alt="${memDTO.userOriginalProfile }" />
-						</a>
-					</c:when>
-					<c:when test="${empty memDTO.userProfile }">
-						<input type="button" value="H" class="submitprofile" onclick="location.href='/Inbeomstagram/member/updateForm'"/>
-					</c:when>
-				</c:choose>
-			</c:if>
-			<c:if test="${ memDTO.kakaoCheck == 'T' }">
-				<c:choose>
-					<c:when test="${not empty memDTO.kakaoProfile }">
-						<a href="/Inbeomstagram/member/updateForm" >
-							<img src="${ memDTO.kakaoProfile }" alt="카카오 사진" />
-						</a>
-					</c:when>
-					<c:when test="${empty memDTO.kakaoProfile }">
-						<input type="button" value="H" class="submitprofile" onclick="location.href='/Inbeomstagram/member/updateForm'"/>
-					</c:when>
-				</c:choose>
-			</c:if>
+			<c:choose>
+				<c:when test="${memDTO.userProfile != null}">
+					<a href="/Inbeomstagram/member/updateForm" >
+						<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
+					    	 alt="유저 프로필 이미지">
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="/Inbeomstagram/member/updateForm" >
+						<img src="${memDTO.kakaoProfile}" alt="유저 프로필 이미지">
+					</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="username">
 			${memDTO.name }
@@ -155,7 +144,7 @@ $(document).ready(function() {
                         boardbody.append(createPinButton);
                         
                         createPinButton.on("click", function() {
-                            window.location.href = "/Inbeomstagram/board/boardWriteForm";
+                            window.location.href = "/Inbeomstagram/board/writeForm";
                         });
                     });
                 } else {
@@ -163,7 +152,7 @@ $(document).ready(function() {
 
                     scrapPinButton.remove();
                     createPinButton.on("click", function() {
-                        window.location.href = "/Inbeomstagram/board/boardWriteForm";
+                        window.location.href = "/Inbeomstagram/board/writeForm";
                     });
 
                     boardList.append(createPinButton);

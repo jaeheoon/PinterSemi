@@ -159,7 +159,9 @@ hr {
     font-size: 18px;
     color: #333;
 }
-
+#cre-scrBtn {
+	margin-top: 20px;
+}
 /* 핀 만들기 버튼 스타일 */
 .create-pin-button, .scrap-pin-button {
     display: block;

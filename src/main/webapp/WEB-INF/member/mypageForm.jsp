@@ -62,6 +62,7 @@
         		
         	</div>
         </div>
+        <div id="cre-scrBtn"></div>
      </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -70,6 +71,7 @@ $(document).ready(function() {
     let seq_member = '${memDTO.seq_member}';
     let createPinButton = $("<button type='button'>").text("핀 만들기").addClass("create-pin-button");
     let scrapPinButton = $("<button type='button'>").text("핀 저장하기").addClass("scrap-pin-button");
+    let buttons = $('#cre-scrBtn');
     // 초기 로딩 시 저장된 핀 가져오기
     loadSavedPins();
 
@@ -106,7 +108,7 @@ $(document).ready(function() {
 
                         boardList.append(linkElement);
                         createPinButton.remove();
-                        boardbody.append(scrapPinButton);
+                        buttons.append(scrapPinButton);
                         
                         scrapPinButton.on("click", function() {
                             window.location.href = "/Inbeomstagram/board/searchPage";
@@ -120,7 +122,7 @@ $(document).ready(function() {
                         window.location.href = "/Inbeomstagram/board/searchPage";
                     });
 
-                    boardList.append(scrapPinButton);
+                    buttons.append(scrapPinButton);
                 }
             },
             error: function(e) {
@@ -152,7 +154,7 @@ $(document).ready(function() {
 
                         boardList.append(linkElement);
                         scrapPinButton.remove();
-                        boardbody.append(createPinButton);
+                        buttons.append(createPinButton);
                         
                         createPinButton.on("click", function() {
                             window.location.href = "/Inbeomstagram/board/boardWriteForm";
@@ -166,7 +168,7 @@ $(document).ready(function() {
                         window.location.href = "/Inbeomstagram/board/boardWriteForm";
                     });
 
-                    boardList.append(createPinButton);
+                    buttons.append(createPinButton);
                 }
             },
             error: function(e) {

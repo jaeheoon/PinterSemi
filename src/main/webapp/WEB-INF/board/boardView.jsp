@@ -18,6 +18,7 @@
 		data-name="${sessionScope.memDTO.name}"
 		data-board-name="${boardDTO.imageSubject}"
 		data-image="${boardDTO.imageFileName }"
+		data-board-author="${boardDTO.seq_member }"
 		data-javaScriptKey="${javaScriptKey}"></div>
 	<div id="headerEnd" style="width: 100%; height: 91px;"></div>
 	<div class="back" onclick="closePage()">
@@ -80,16 +81,7 @@
 				</div>
 				<!-- 작성자 -->
 				<div id="userName">
-					<c:choose>
-						<c:when test="${memDTO.userProfile != null}">
-							<img
-								src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
-								alt="유저 프로필 이미지">
-						</c:when>
-						<c:otherwise>
-							<img src="${memDTO.kakaoProfile}" alt="유저 프로필 이미지">
-						</c:otherwise>
-					</c:choose>
+					<img src="" alt="작성자 프로필 이미지">
 					<h4>작성자 : ${boardDTO.name }</h4>
 				</div>
 				<!-- 제목  -->

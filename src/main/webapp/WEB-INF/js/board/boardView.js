@@ -354,8 +354,27 @@ $(document).ready(function() {
 });
 function onLoadpage() {
     const seqBoard = $('#data').data('seq-board');
-    const seqMember = $('#seq_member').val(); 
+    const seqBoardAuthor = $('#data').data('board-author'); 
     const memberName = $('#data').data('name');
+    
+    // 작성자 프로필 가져오기
+    $.ajax({
+        type: 'POST',
+        url: '/Inbeomstagram/board/getBoardMemberProfile',
+        data: { 'seq_member': seqBoardAuthor },
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === 'success') {
+                // 이미지 src 속성을 응답 받은 profile로 설정
+                $('#userName img').attr('src', response.profile);
+            } else {
+                console.log('프로필 이미지를 불러오는 데 실패했습니다.');
+            }
+        },
+        error: function(e) {
+            console.error('에러 발생:', e);
+        }
+    });
     
     // 조회수 증가
     $.ajax({
@@ -457,4 +476,3 @@ function onLoadpage() {
         }
     });
 }
-

@@ -56,6 +56,7 @@
 			<a href="/Inbeomstagram/member/updateForm"
 				class="info">${memDTO.name }님</a>
 			<button onclick="logout()" class="logout">로그아웃</button>
+			<img src="../img/avatardefault_92824.png" onclick="location.href='/Inbeomstagram/member/mypageForm'"/>
 		</c:if>
 	</div>	
 </header>

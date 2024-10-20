@@ -80,9 +80,16 @@
 				</div>
 				<!-- 작성자 -->
 				<div id="userName">
-					<!-- 나중에 수정해야 함 -->
-					<img src="${pageContext.request.contextPath}/img/imoji.png"
-						alt="유저 프로필 이미지">
+					<c:choose>
+						<c:when test="${memDTO.kakaoCheck == 'F'}">
+							<img
+								src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
+								alt="유저 프로필 이미지">
+						</c:when>
+						<c:otherwise>
+							<img src="${memDTO.kakaoProfile}" alt="유저 프로필 이미지">
+						</c:otherwise>
+					</c:choose>
 					<h4>작성자 : ${boardDTO.name }</h4>
 				</div>
 				<!-- 제목  -->
@@ -117,9 +124,17 @@
 
 					<!-- 댓글 작성 -->
 					<div id="comment-input" style="display: flex; align-items: center;">
-						<div id="memberProfileImage">							
-							<img src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
-								alt="유저 프로필 이미지">
+						<div id="memberProfileImage">
+							<c:choose>
+								<c:when test="${memDTO.kakaoCheck == 'F'}">
+									<img
+										src="https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${memDTO.userProfile}"
+										alt="유저 프로필 이미지">
+								</c:when>
+								<c:otherwise>
+									<img src="${memDTO.kakaoProfile}" alt="유저 프로필 이미지">
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<input type="text" id="commentContent" name="commentContent"
 							style="padding-left: 10px;">

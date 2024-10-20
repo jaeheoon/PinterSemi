@@ -404,7 +404,10 @@ function onLoadpage() {
         return result;
     }
     
-
+    function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString(); // 사용자의 로케일에 맞는 형식으로 변환
+    } 
     // 댓글 로드
     $.ajax({
         type: 'POST',
@@ -413,14 +416,15 @@ function onLoadpage() {
         success: function(commentList) {
             // 트리 구조로 댓글 재구성
             const commentTree = buildCommentTree(commentList);
-
+            
+               
             // 댓글 HTML 생성
             function renderComments(comments) {
                 let commentHtml = '';
                 comments.forEach(function(comment) {
                     commentHtml += '<div class="comment-content" data-seq="' + comment.seq_comment + '">'
                         + '<strong>' + comment.name + '</strong> : ' + comment.commentContent
-                        + ' (' + comment.logtime + ')';
+                        + ' (' + formatDate(comment.logtime) + ')';
                     
                     if (memberName === comment.name) {
                         commentHtml += '<button class="options-btn" data-seq="' + comment.seq_comment + '">⋯</button>';
@@ -475,3 +479,4 @@ function onLoadpage() {
         }
     });
 }
+

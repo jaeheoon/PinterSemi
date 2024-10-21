@@ -177,7 +177,7 @@
 												const title = '${boardDTO.imageSubject}'; // 제목
 												const description = '${boardDTO.imageContent}'; // 내용
 												const imageUrl = 'https://kr.object.ncloudstorage.com/bitcamp-9th-pinter/storage/${boardDTO.imageFileName}'; // 이미지 URL
-												const webUrl = '${pageContext.request.contextPath}/board/boardView?seq_board=${boardDTO.seq_board}'; // 웹사이트 URL
+												const webUrl = 'http://211.188.49.138:8090/Inbeomstagram/board/boardView?seq_board=${boardDTO.seq_board}'; // 웹사이트 URL
 												const mobileWebUrl = webUrl; // 모바일 웹사이트 URL
 
 												// 카카오톡 공유하기

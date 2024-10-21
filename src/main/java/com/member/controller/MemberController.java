@@ -65,7 +65,11 @@ public class MemberController {
 		memberDTO.setPhoneNumber(phoneNumber);
 		memberDTO.setAddress(address);
 		memberDTO.setKakaoCheck("F");
-		memberDTO.setKakaoProfile("http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg");
+		if(memberDTO.getKakaoProfile() == null) {
+			memberDTO.setKakaoProfile("http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg");
+		} else {
+			memberDTO.setKakaoProfile(memberDTO.getKakaoProfile());
+		}
 		memberService.join(memberDTO);
 	}
 

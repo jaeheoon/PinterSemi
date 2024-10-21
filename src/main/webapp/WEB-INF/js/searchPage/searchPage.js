@@ -2,6 +2,8 @@ $(document).ready(function() {
     let currentPage = 1;  // 1페이지는 서버에서 로드됐으므로 2페이지부터 시작
     let loading = false;
 
+    loadMoreData(0);
+
     // 스크롤 이벤트 감지
     $(window).scroll(function() {
         // 스크롤이 페이지 끝에 도달했을 때 추가 데이터 요청

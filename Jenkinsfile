@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Update Submodules') {
-            steps {
+            steps { 
                 sh 'git submodule update --init --recursive'
             }
         }
